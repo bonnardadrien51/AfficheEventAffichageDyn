@@ -1,0 +1,293 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    height:100%;
+}
+
+body{
+
+    background:#0a1330;
+
+    font-family:"Baloo 2", "Segoe UI", Arial, sans-serif;
+
+    color:white;
+
+    overflow:hidden;
+
+}
+
+#screen{
+
+    height:100vh;
+
+    width:100vw;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:3vh 4vw;
+
+    position:relative;
+
+}
+
+/**************************************************
+    HAUT : titre de campagne + date
+**************************************************/
+
+#topBlock{
+
+    text-align:center;
+
+    margin-bottom:2vh;
+
+}
+
+#campaignTitle{
+
+    font-size:5vw;
+
+    font-weight:800;
+
+    line-height:1.1;
+
+}
+
+#campaignDate{
+
+    font-size:4vw;
+
+    font-weight:800;
+
+    margin-top:0.5vh;
+
+}
+
+/**************************************************
+    BANDEAU COMPTE À REBOURS
+**************************************************/
+
+#countdownBanner{
+
+    background:#2e5cf0;
+
+    align-self:center;
+
+    padding:1.4vh 4vw;
+
+    border-radius:100px;
+
+    transform:rotate(-2deg);
+
+    margin:2vh 0 4vh 0;
+
+    box-shadow:0 6px 0 rgba(0,0,0,.15);
+
+}
+
+#countdownText{
+
+    font-size:3.2vw;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+/**************************************************
+    LIGNE PRINCIPALE : photo + infos événement
+**************************************************/
+
+#mainRow{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:4vw;
+
+    flex:1;
+
+    min-height:0;
+
+}
+
+#photoBox{
+
+    flex:0 0 40%;
+
+    height:80%;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    background:#1c2b52;
+
+}
+
+#photoBox img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+#eventInfo{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2.2vh;
+
+}
+
+#eventTitle{
+
+    font-size:4.2vw;
+
+    font-weight:800;
+
+    line-height:1.15;
+
+}
+
+.infoLine{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1.2vw;
+
+    font-size:2.6vw;
+
+    font-weight:700;
+
+}
+
+.icon{
+
+    width:2.6vw;
+    height:2.6vw;
+
+    flex-shrink:0;
+
+}
+
+/**************************************************
+    BAS : logos
+**************************************************/
+
+#bottomRow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-top:3vh;
+
+}
+
+#campaignLogoBox{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:1vh 1.4vw;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+#campaignLogoBox img{
+
+    height:8vh;
+
+    width:auto;
+
+    display:block;
+
+}
+
+#associationLogo{
+
+    height:9vh;
+
+    width:auto;
+
+}
+
+/**************************************************
+    AUCUN ÉVÉNEMENT
+**************************************************/
+
+#noEvent{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:3vw;
+
+    font-weight:700;
+
+    text-align:center;
+
+    padding:0 10vw;
+
+    background:#0a1330;
+
+}
+
+body.empty #topBlock,
+body.empty #countdownBanner,
+body.empty #mainRow,
+body.empty #bottomRow{
+
+    display:none;
+
+}
+
+body.empty #noEvent{
+
+    display:flex;
+
+}
+
+/* Masque proprement les blocs optionnels quand une info manque
+   (pas de campagne renseignée dans la description, pas de lieu...) */
+.hidden{
+
+    display:none !important;
+
+}
