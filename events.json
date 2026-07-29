@@ -1,19 +1,27 @@
 {
-  "updated": "30/07/2026 00:04:33",
+  "updated": "30/07/2026 01:05:45",
   "events": [
     {
       "title": "Réalité virtuelle",
       "location": "",
       "start": "2026-08-22T08:00:00.000Z",
       "end": "2026-08-22T18:00:00.000Z",
-      "campaign": null
+      "campaign": {
+        "titre": "Tout Besançon vole 2026",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/VR.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20Blanc.svg"
+      }
     },
     {
       "title": "Création Boomerang ",
-      "location": "",
+      "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-22T08:00:00.000Z",
       "end": "2026-08-22T18:00:00.000Z",
-      "campaign": null
+      "campaign": {
+        "titre": "Tout Besançon vole 2026",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20Blanc.svg"
+      }
     },
     {
       "title": "Réalité virtuelle",
@@ -24,9 +32,23 @@
     },
     {
       "title": "Création Boomerang ",
-      "location": "",
+      "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T15:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "title": "Buvette",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-29T08:00:00.000Z",
+      "end": "2026-08-29T21:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "title": "Buvette",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T16:00:00.000Z",
       "campaign": null
     }
   ]
