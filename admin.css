@@ -1,0 +1,150 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#0a1330;
+    color:white;
+    font-family:"Baloo 2","Segoe UI",Arial,sans-serif;
+    padding:24px;
+
+}
+
+#tokenBar{
+
+    background:#141c40;
+    border-radius:12px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:24px;
+
+}
+
+#tokenStatus{
+    font-weight:700;
+    margin-right:auto;
+}
+
+#tokenInput{
+
+    flex:1;
+    min-width:280px;
+    padding:8px 12px;
+    border-radius:8px;
+    border:none;
+    font-size:15px;
+
+}
+
+#tokenBar button{
+
+    padding:8px 16px;
+    border:none;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    background:#2e5cf0;
+    color:white;
+
+}
+
+#tokenClear{
+    background:#3a4066;
+}
+
+h1{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+#hint{
+    color:#a9b0cc;
+    margin-bottom:24px;
+    max-width:800px;
+    line-height:1.4;
+}
+
+.eventCard{
+
+    background:#141c40;
+    border-radius:14px;
+    padding:16px 20px;
+    margin-bottom:14px;
+
+}
+
+.eventCard .title{
+    font-size:20px;
+    font-weight:700;
+}
+
+.eventCard .meta{
+    color:#a9b0cc;
+    font-size:14px;
+    margin:4px 0 12px 0;
+}
+
+.statusButtons{
+
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+
+}
+
+.statusButtons button{
+
+    padding:8px 18px;
+    border-radius:999px;
+    border:2px solid rgba(255,255,255,.25);
+    background:transparent;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    font-size:14px;
+
+}
+
+.statusButtons button.active{
+
+    border-color:transparent;
+
+}
+
+.statusButtons button[data-status=""]{
+    background:rgba(255,255,255,.08);
+}
+
+.statusButtons button[data-status="Annulé"].active{
+    background:#c0392b;
+}
+
+.statusButtons button[data-status="Complet"].active{
+    background:#e08e0b;
+}
+
+.statusButtons button[data-status="Reporté"].active{
+    background:#6c5ce7;
+}
+
+.statusButtons button[data-status=""].active{
+    background:#3a4066;
+    border-color:rgba(255,255,255,.4);
+}
+
+.saving{
+    opacity:.5;
+    pointer-events:none;
+}
+
+.errorMsg{
+    color:#ff8080;
+    font-size:13px;
+    margin-top:8px;
+}

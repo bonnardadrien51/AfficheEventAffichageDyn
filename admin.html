@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <title>Administration - Statuts des événements</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<div id="tokenBar">
+
+    <span id="tokenStatus">Aucun token enregistré</span>
+
+    <input id="tokenInput" type="password" placeholder="Token GitHub (fine-grained, ce repo, Contents: Read/Write)">
+    <button id="tokenSave">Enregistrer</button>
+    <button id="tokenClear">Effacer</button>
+
+</div>
+
+<h1>Statut des événements</h1>
+
+<p id="hint">
+    Cliquez sur un statut pour l'appliquer immédiatement. "Aucun" retire le statut
+    (l'affichage retombera sur celui éventuellement défini dans la description
+    Google Calendar, sinon aucun bandeau).
+</p>
+
+<div id="eventList">
+    Chargement des événements…
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>

@@ -1,9 +1,11 @@
 const DATA_URL = "events.json";
+const OVERRIDES_URL = "status-overrides.json";
 
-// Réinterroge events.json à cet intervalle (le fichier lui-même n'est
-// régénéré côté serveur que toutes les 30 min, mais on vérifie plus
-// souvent pour ne rien rater si l'écran reste allumé en continu).
-const REFRESH_DATA_MS = 5 * 60 * 1000;
+// Réinterroge events.json + status-overrides.json à cet intervalle.
+// events.json n'est régénéré côté serveur que toutes les 30 min, mais
+// status-overrides.json (modifié depuis la page admin) doit remonter
+// vite ; comme les deux fichiers sont petits, on vérifie souvent.
+const REFRESH_DATA_MS = 60 * 1000;
 
 // Recalcule le compte à rebours à cet intervalle, sans refaire d'appel réseau.
 const REFRESH_COUNTDOWN_MS = 30 * 1000;
@@ -227,8 +229,27 @@ async function loadEvents(){
         const response = await fetch(DATA_URL + "?t=" + Date.now());
         const json = await response.json();
 
+        let overrides = {};
+
+        try{
+            const overridesRes = await fetch(OVERRIDES_URL + "?t=" + Date.now());
+            overrides = await overridesRes.json();
+        } catch(err){
+            // Pas grave si absent : on reste sur le statut de events.json.
+        }
+
         if(json.events && json.events.length){
-            renderEvent(json.events[0]);
+
+            const event = json.events[0];
+
+            const override = overrides[event.uid];
+            if(override && override.statut !== undefined){
+                event.campaign = event.campaign || {};
+                event.campaign.statut = override.statut;
+            }
+
+            renderEvent(event);
+
         } else {
             renderEmpty();
         }
