@@ -1,5 +1,3 @@
-
-Generate events · JS
 const axios = require("axios");
 const ical = require("node-ical");
 const fs = require("fs");
