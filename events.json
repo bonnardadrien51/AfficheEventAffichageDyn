@@ -1,11 +1,18 @@
 {
-  "updated": "30/07/2026 21:38:36",
+  "updated": "30/07/2026 23:15:04",
   "events": [
     {
       "title": "Création Boomerang ",
       "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-22T08:00:00.000Z",
       "end": "2026-08-22T18:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "title": "Buvette",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-29T08:00:00.000Z",
+      "end": "2026-08-29T21:00:00.000Z",
       "campaign": null
     },
     {
@@ -23,13 +30,6 @@
         "inscription": "",
         "statut": ""
       }
-    },
-    {
-      "title": "Buvette",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-29T08:00:00.000Z",
-      "end": "2026-08-29T21:00:00.000Z",
-      "campaign": null
     },
     {
       "title": "Création Boomerang ",
