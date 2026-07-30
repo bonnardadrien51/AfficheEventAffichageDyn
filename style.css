@@ -26,6 +26,43 @@ body{
 
     width:100vw;
 
+    position:relative;
+
+    background-size:cover;
+
+    background-position:center;
+
+    overflow:hidden;
+
+}
+
+/* Assombrit une éventuelle photo de fond pour garder le texte lisible.
+   Reste invisible (display:none, posé par script.js) tant qu'aucune
+   photo de fond n'est définie sur l'événement. */
+#bgOverlay{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(6,12,32,.62);
+
+    z-index:0;
+
+}
+
+#content{
+
+    position:relative;
+
+    z-index:1;
+
+    height:100%;
+
+    width:100%;
+
     display:flex;
 
     flex-direction:column;
@@ -34,7 +71,43 @@ body{
 
     padding:3vh 4vw;
 
-    position:relative;
+}
+
+/**************************************************
+    BANDEAU DE STATUT (Annulé / Complet / Reporté)
+**************************************************/
+
+#statusRibbon{
+
+    display:none;
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    z-index:2;
+
+    text-align:center;
+
+    padding:1.6vh 0;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+
+}
+
+#statusText{
+
+    font-size:3vw;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
 
 }
 
@@ -209,7 +282,7 @@ body{
 
 #campaignLogoBox{
 
-    background:white;
+    background:transparent;
 
     border-radius:16px;
 
@@ -235,7 +308,7 @@ body{
 
 #associationLogo{
 
-    height:9vh;
+    height:13vh;
 
     width:auto;
 

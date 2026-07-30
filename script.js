@@ -91,6 +91,14 @@ function computeCountdown(event){
 
 }
 
+const STATUS_COLORS = {
+    "annulé": "#c0392b",
+    "annule": "#c0392b",
+    "complet": "#e08e0b",
+    "reporté": "#6c5ce7",
+    "reporte": "#6c5ce7"
+};
+
 function renderEvent(event){
 
     currentEvent = event;
@@ -136,8 +144,49 @@ function renderEvent(event){
     if(campaign.logo){
         campaignLogo.src = campaign.logo;
         campaignLogoBox.classList.remove("hidden");
+        // Couleur de fond du logo : celle fournie, sinon transparent.
+        campaignLogoBox.style.background = campaign.logo_fond || "transparent";
     } else {
         campaignLogoBox.classList.add("hidden");
+    }
+
+    // Photo de fond de l'écran : si fournie, on l'applique avec un voile
+    // sombre pour garder le texte lisible ; sinon on garde le fond uni.
+    const screen = document.getElementById("screen");
+    const bgOverlay = document.getElementById("bgOverlay");
+    if(campaign.fond){
+        screen.style.backgroundImage = `url("${campaign.fond}")`;
+        bgOverlay.style.display = "block";
+    } else {
+        screen.style.backgroundImage = "";
+        bgOverlay.style.display = "none";
+    }
+
+    const tarifEl = document.getElementById("eventTarif");
+    if(campaign.tarif){
+        tarifEl.textContent = campaign.tarif;
+        tarifEl.closest(".infoLine").classList.remove("hidden");
+    } else {
+        tarifEl.closest(".infoLine").classList.add("hidden");
+    }
+
+    const inscriptionEl = document.getElementById("eventInscription");
+    if(campaign.inscription){
+        inscriptionEl.textContent = campaign.inscription;
+        inscriptionEl.closest(".infoLine").classList.remove("hidden");
+    } else {
+        inscriptionEl.closest(".infoLine").classList.add("hidden");
+    }
+
+    const statusRibbon = document.getElementById("statusRibbon");
+    const statusText = document.getElementById("statusText");
+    if(campaign.statut){
+        const key = campaign.statut.trim().toLowerCase();
+        statusText.textContent = campaign.statut;
+        statusRibbon.style.background = STATUS_COLORS[key] || "#c0392b";
+        statusRibbon.style.display = "block";
+    } else {
+        statusRibbon.style.display = "none";
     }
 
     updateCountdown();
