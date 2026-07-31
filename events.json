@@ -1,5 +1,5 @@
 {
-  "updated": "31/07/2026 09:23:20",
+  "updated": "31/07/2026 12:07:24",
   "events": [
     {
       "uid": "56vm5p4otkrfrs8dhel6migkf1@google.com",
@@ -35,6 +35,14 @@
       }
     },
     {
+      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
+      "title": "Réalité virtuelle",
+      "location": "",
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T15:00:00.000Z",
+      "campaign": null
+    },
+    {
       "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
       "title": "Création Boomerang ",
       "location": "Le Port Douvot, 25000 Besançon, France",
@@ -50,14 +58,6 @@
         "inscription": "",
         "statut": ""
       }
-    },
-    {
-      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
-      "title": "Réalité virtuelle",
-      "location": "",
-      "start": "2026-08-30T08:00:00.000Z",
-      "end": "2026-08-30T15:00:00.000Z",
-      "campaign": null
     },
     {
       "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
