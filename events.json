@@ -1,5 +1,5 @@
 {
-  "updated": "01/08/2026 23:27:40",
+  "updated": "02/08/2026 00:30:05",
   "events": [
     {
       "uid": "56vm5p4otkrfrs8dhel6migkf1@google.com",
@@ -7,14 +7,6 @@
       "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-22T08:00:00.000Z",
       "end": "2026-08-22T18:00:00.000Z",
-      "campaign": null
-    },
-    {
-      "uid": "3n4ng8bl9ae8din6jg5a5svhu0@google.com",
-      "title": "Buvette",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-29T08:00:00.000Z",
-      "end": "2026-08-29T21:00:00.000Z",
       "campaign": null
     },
     {
@@ -35,6 +27,30 @@
       }
     },
     {
+      "uid": "3n4ng8bl9ae8din6jg5a5svhu0@google.com",
+      "title": "Buvette",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-29T08:00:00.000Z",
+      "end": "2026-08-29T21:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
+      "title": "Réalité virtuelle",
+      "location": "",
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T15:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
+      "title": "Buvette",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T16:00:00.000Z",
+      "campaign": null
+    },
+    {
       "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
       "title": "Création Boomerang ",
       "location": "Le Port Douvot, 25000 Besançon, France",
@@ -50,22 +66,6 @@
         "inscription": "",
         "statut": ""
       }
-    },
-    {
-      "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
-      "title": "Buvette",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-30T08:00:00.000Z",
-      "end": "2026-08-30T16:00:00.000Z",
-      "campaign": null
-    },
-    {
-      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
-      "title": "Réalité virtuelle",
-      "location": "",
-      "start": "2026-08-30T08:00:00.000Z",
-      "end": "2026-08-30T15:00:00.000Z",
-      "campaign": null
     }
   ]
 }
