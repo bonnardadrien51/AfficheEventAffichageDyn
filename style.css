@@ -28,6 +28,10 @@ body{
 
     position:relative;
 
+    display:flex;
+
+    flex-direction:column;
+
     background-size:cover;
 
     background-position:center;
@@ -59,7 +63,9 @@ body{
 
     z-index:1;
 
-    height:100%;
+    flex:1;
+
+    min-height:0;
 
     width:100%;
 
@@ -75,27 +81,25 @@ body{
 
 /**************************************************
     BANDEAU DE STATUT (Annulé / Complet / Reporté)
+    Zone dédiée en bas de l'écran, dans le flux normal :
+    ne recouvre jamais le contenu au-dessus.
 **************************************************/
 
 #statusRibbon{
 
     display:none;
 
-    position:absolute;
+    position:relative;
 
-    top:0;
+    z-index:1;
 
-    left:0;
-
-    right:0;
-
-    z-index:2;
+    flex-shrink:0;
 
     text-align:center;
 
-    padding:1.6vh 0;
+    padding:1.8vh 0;
 
-    box-shadow:0 4px 12px rgba(0,0,0,.3);
+    box-shadow:0 -4px 12px rgba(0,0,0,.3);
 
 }
 
