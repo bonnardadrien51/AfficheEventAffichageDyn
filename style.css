@@ -20,11 +20,38 @@ body{
 
 }
 
-#screen{
+/**************************************************
+    SCÈNE : centre et met à l'échelle #screen (conçu
+    pour 1920x1080) pour qu'il tienne dans n'importe
+    quelle taille de fenêtre, plein écran ou non, sans
+    jamais déformer les proportions internes.
+**************************************************/
+
+#stage{
+
+    width:100vw;
 
     height:100vh;
 
-    width:100vw;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#0a1330;
+
+    overflow:hidden;
+
+}
+
+#screen{
+
+    width:1920px;
+
+    height:1080px;
+
+    flex-shrink:0;
 
     position:relative;
 
@@ -37,6 +64,8 @@ body{
     background-position:center;
 
     overflow:hidden;
+
+    transform-origin:center center;
 
 }
 
@@ -75,7 +104,7 @@ body{
 
     justify-content:center;
 
-    padding:3vh 4vw;
+    padding:32px 77px;
 
 }
 
@@ -97,7 +126,7 @@ body{
 
     text-align:center;
 
-    padding:1.8vh 0;
+    padding:19px 0;
 
     box-shadow:0 -4px 12px rgba(0,0,0,.3);
 
@@ -105,7 +134,7 @@ body{
 
 #statusText{
 
-    font-size:3vw;
+    font-size:58px;
 
     font-weight:800;
 
@@ -123,13 +152,13 @@ body{
 
     text-align:center;
 
-    margin-bottom:2vh;
+    margin-bottom:22px;
 
 }
 
 #campaignTitle{
 
-    font-size:5vw;
+    font-size:96px;
 
     font-weight:800;
 
@@ -139,11 +168,11 @@ body{
 
 #campaignDate{
 
-    font-size:4vw;
+    font-size:77px;
 
     font-weight:800;
 
-    margin-top:0.5vh;
+    margin-top:5px;
 
 }
 
@@ -157,11 +186,11 @@ body{
 
     align-self:center;
 
-    padding:1.4vh 4vw;
+    padding:15px 77px;
 
     border-radius:100px;
 
-    margin:2vh 0 4vh 0;
+    margin:22px 0 43px 0;
 
     box-shadow:0 6px 0 rgba(0,0,0,.15);
 
@@ -169,7 +198,7 @@ body{
 
 #countdownText{
 
-    font-size:3.2vw;
+    font-size:61px;
 
     font-weight:700;
 
@@ -187,7 +216,7 @@ body{
 
     align-items:center;
 
-    gap:4vw;
+    gap:77px;
 
     flex:1;
 
@@ -199,7 +228,7 @@ body{
 
     flex:0 0 auto;
 
-    height:40vh;
+    height:432px;
 
     aspect-ratio:1/1;
 
@@ -231,13 +260,13 @@ body{
 
     flex-direction:column;
 
-    gap:2.2vh;
+    gap:24px;
 
 }
 
 #eventTitle{
 
-    font-size:4.2vw;
+    font-size:81px;
 
     font-weight:800;
 
@@ -251,9 +280,9 @@ body{
 
     align-items:center;
 
-    gap:1.2vw;
+    gap:23px;
 
-    font-size:2.6vw;
+    font-size:50px;
 
     font-weight:700;
 
@@ -261,8 +290,8 @@ body{
 
 .icon{
 
-    width:2.6vw;
-    height:2.6vw;
+    width:50px;
+    height:50px;
 
     flex-shrink:0;
 
@@ -294,7 +323,7 @@ body{
 
     align-items:center;
 
-    padding:2vh 4vw;
+    padding:22px 77px;
 
 }
 
@@ -304,7 +333,7 @@ body{
 
     border-radius:16px;
 
-    padding:1vh 1.4vw;
+    padding:11px 27px;
 
     display:flex;
 
@@ -316,7 +345,7 @@ body{
 
 #campaignLogoBox img{
 
-    height:12vh;
+    height:130px;
 
     width:auto;
 
@@ -326,7 +355,7 @@ body{
 
 #associationLogo{
 
-    height:16vh;
+    height:173px;
 
     width:auto;
 
@@ -350,13 +379,13 @@ body{
 
     justify-content:center;
 
-    font-size:3vw;
+    font-size:58px;
 
     font-weight:700;
 
     text-align:center;
 
-    padding:0 10vw;
+    padding:0 192px;
 
     background:#0a1330;
 
