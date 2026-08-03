@@ -161,8 +161,6 @@ body{
 
     border-radius:100px;
 
-    transform:rotate(-2deg);
-
     margin:2vh 0 4vh 0;
 
     box-shadow:0 6px 0 rgba(0,0,0,.15);
@@ -201,7 +199,7 @@ body{
 
     flex:0 0 auto;
 
-    height:75vh;
+    height:40vh;
 
     aspect-ratio:1/1;
 
@@ -271,18 +269,32 @@ body{
 }
 
 /**************************************************
-    BAS : logos
+    ZONE BASSE : logos + bandeau de statut regroupés
 **************************************************/
+
+#bottomZone{
+
+    position:relative;
+
+    z-index:1;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
 
 #bottomRow{
 
     display:flex;
 
-    justify-content:space-between;
+    justify-content:flex-start;
 
-    align-items:flex-end;
+    align-items:center;
 
-    margin-top:3vh;
+    padding:2vh 4vw;
 
 }
 
@@ -304,7 +316,7 @@ body{
 
 #campaignLogoBox img{
 
-    height:8vh;
+    height:12vh;
 
     width:auto;
 
@@ -314,9 +326,11 @@ body{
 
 #associationLogo{
 
-    height:13vh;
+    height:16vh;
 
     width:auto;
+
+    margin-left:auto;
 
 }
 
@@ -351,7 +365,7 @@ body{
 body.empty #topBlock,
 body.empty #countdownBanner,
 body.empty #mainRow,
-body.empty #bottomRow{
+body.empty #bottomZone{
 
     display:none;
 
