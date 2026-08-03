@@ -1,3 +1,24 @@
+// Le design est fait pour 1920x1080 ; on calcule le facteur d'échelle
+// pour que ça tienne dans n'importe quelle fenêtre (plein écran ou non),
+// sans jamais déformer les proportions ni faire chevaucher le contenu.
+function applyScale(){
+
+    const screen = document.getElementById("screen");
+
+    if(!screen) return;
+
+    const scale = Math.min(
+        window.innerWidth / 1920,
+        window.innerHeight / 1080
+    );
+
+    screen.style.transform = `scale(${scale})`;
+
+}
+
+window.addEventListener("resize", applyScale);
+applyScale();
+
 const DATA_URL = "events.json";
 const OVERRIDES_URL = "status-overrides.json";
 
