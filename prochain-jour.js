@@ -58,11 +58,18 @@ function renderCard(event, overrides){
         </div>
     ` : "";
 
+    const thumbHtml = (event.campaign && event.campaign.image) ? `
+        <div class="thumb">
+            <img src="${event.campaign.image}" alt="">
+        </div>
+    ` : "";
+
     card.innerHTML = `
         <div class="date">
             <div class="weekday">${shortWeekdays[start.getDay()]}</div>
             <div class="day">${start.getDate()}</div>
         </div>
+        ${thumbHtml}
         <div class="infoBlock">
             <div class="textCol">
                 <div class="title">${event.title}</div>
