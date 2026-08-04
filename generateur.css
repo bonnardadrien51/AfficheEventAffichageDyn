@@ -1,0 +1,162 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#0a1330;
+    color:white;
+    font-family:"Baloo 2","Segoe UI",Arial,sans-serif;
+    padding:24px;
+
+}
+
+h1{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+#hint{
+    color:#a9b0cc;
+    max-width:800px;
+    line-height:1.4;
+    margin-bottom:24px;
+}
+
+#layout{
+
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+
+}
+
+#formPanel{
+
+    background:#141c40;
+    border-radius:14px;
+    padding:20px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    flex:1;
+    min-width:320px;
+    max-width:480px;
+
+}
+
+label{
+
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:15px;
+    font-weight:700;
+
+}
+
+input[type="text"],
+input[type="url"],
+select{
+
+    padding:10px 12px;
+    border-radius:8px;
+    border:none;
+    font-size:15px;
+    font-family:inherit;
+
+}
+
+.colorRow{
+
+    display:flex;
+    gap:8px;
+
+}
+
+.colorRow input[type="color"]{
+
+    width:44px;
+    height:44px;
+    border:none;
+    border-radius:8px;
+    padding:0;
+    cursor:pointer;
+
+}
+
+.colorRow input[type="text"]{
+
+    flex:1;
+
+}
+
+#resetBtn{
+
+    margin-top:8px;
+    padding:10px 16px;
+    border-radius:8px;
+    border:none;
+    background:#3a4066;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    align-self:flex-start;
+
+}
+
+#outputPanel{
+
+    background:#141c40;
+    border-radius:14px;
+    padding:20px 24px;
+    flex:1;
+    min-width:320px;
+    max-width:640px;
+
+}
+
+#outputHeader{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+    font-weight:700;
+
+}
+
+#copyBtn{
+
+    padding:8px 16px;
+    border-radius:8px;
+    border:none;
+    background:#2e5cf0;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+
+}
+
+#copyBtn.copied{
+
+    background:#2fae5f;
+
+}
+
+#output{
+
+    background:#0a1330;
+    border-radius:10px;
+    padding:16px;
+    font-family:"Consolas","Monaco",monospace;
+    font-size:14px;
+    line-height:1.5;
+    white-space:pre-wrap;
+    word-break:break-word;
+    color:#d7defc;
+
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <title>Générateur JSON - Description événement</title>
+
+    <link rel="stylesheet" href="generateur.css">
+
+</head>
+
+<body>
+
+<h1>Générateur de description JSON</h1>
+
+<p id="hint">
+    Remplissez ce qui s'applique à l'événement (tout est facultatif),
+    puis copiez le résultat dans le champ Description de l'événement
+    sur Google Calendar.
+</p>
+
+<div id="layout">
+
+    <div id="formPanel">
+
+        <label>
+            Titre de la campagne
+            <input id="f_titre" type="text" placeholder="Ex: Tout Besançon vole 2026">
+        </label>
+
+        <label>
+            Photo de l'événement (URL)
+            <input id="f_image" type="url" placeholder="https://...">
+        </label>
+
+        <label>
+            Logo de la campagne (URL)
+            <input id="f_logo" type="url" placeholder="https://...">
+        </label>
+
+        <label>
+            Couleur de fond du logo
+            <div class="colorRow">
+                <input id="f_logo_fond_picker" type="color" value="#ffffff">
+                <input id="f_logo_fond" type="text" placeholder="Vide = transparent">
+            </div>
+        </label>
+
+        <label>
+            Photo de fond plein écran (URL)
+            <input id="f_fond" type="url" placeholder="Vide = fond bleu nuit actuel">
+        </label>
+
+        <label>
+            Tarif
+            <input id="f_tarif" type="text" placeholder="Ex: Gratuit / Au chapeau / 15€ par personne">
+        </label>
+
+        <label>
+            Inscription
+            <input id="f_inscription" type="text" placeholder="Ex: Sur inscription / Réservation conseillée">
+        </label>
+
+        <label>
+            Statut
+            <select id="f_statut">
+                <option value="">Aucun</option>
+                <option value="Annulé">Annulé</option>
+                <option value="Complet">Complet</option>
+                <option value="Reporté">Reporté</option>
+            </select>
+        </label>
+
+        <button id="resetBtn" type="button">Réinitialiser</button>
+
+    </div>
+
+    <div id="outputPanel">
+
+        <div id="outputHeader">
+            <span>JSON à coller dans la description</span>
+            <button id="copyBtn" type="button">Copier</button>
+        </div>
+
+        <pre id="output"></pre>
+
+    </div>
+
+</div>
+
+<script src="generateur.js"></script>
+
+</body>
+
+</html>
