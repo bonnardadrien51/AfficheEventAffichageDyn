@@ -1,5 +1,5 @@
 {
-  "updated": "04/08/2026 06:44:44",
+  "updated": "04/08/2026 09:42:29",
   "events": [
     {
       "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
@@ -44,19 +44,19 @@
       }
     },
     {
-      "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
-      "title": "Buvette",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-30T08:00:00.000Z",
-      "end": "2026-08-30T16:00:00.000Z",
-      "campaign": null
-    },
-    {
       "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
       "title": "Réalité virtuelle",
       "location": "",
       "start": "2026-08-30T08:00:00.000Z",
       "end": "2026-08-30T15:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
+      "title": "Buvette",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T16:00:00.000Z",
       "campaign": null
     }
   ]
