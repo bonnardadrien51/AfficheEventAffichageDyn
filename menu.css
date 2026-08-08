@@ -1,0 +1,94 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#0a1330;
+    color:white;
+    font-family:"Baloo 2","Segoe UI",Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+
+}
+
+#wrapper{
+
+    max-width:900px;
+    width:100%;
+    text-align:center;
+
+}
+
+#logo{
+
+    height:90px;
+    margin-bottom:16px;
+
+}
+
+h1{
+
+    font-size:36px;
+    font-weight:800;
+
+}
+
+#subtitle{
+
+    color:#a9b0cc;
+    font-size:18px;
+    margin-top:6px;
+    margin-bottom:36px;
+
+}
+
+#menu{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:20px;
+
+}
+
+.menuCard{
+
+    background:#141c40;
+    border-radius:16px;
+    padding:24px 22px;
+    text-decoration:none;
+    color:white;
+    text-align:left;
+    transition:transform .15s, background .15s;
+    border:2px solid transparent;
+
+}
+
+.menuCard:hover{
+
+    transform:translateY(-3px);
+    background:#1b2450;
+    border-color:#2e5cf0;
+
+}
+
+.menuTitle{
+
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:8px;
+
+}
+
+.menuDesc{
+
+    font-size:15px;
+    color:#a9b0cc;
+    line-height:1.4;
+
+}

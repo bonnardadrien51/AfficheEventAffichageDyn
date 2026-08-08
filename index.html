@@ -5,114 +5,55 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 
-    <title>Affichage dynamique - Prochain événement</title>
+    <title>Affichage dynamique - L'Établi Ludique</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
 
 </head>
 
 <body>
 
-<div id="stage">
+<div id="wrapper">
 
-<div id="screen">
+    <img id="logo" src="img/logo-etabli.svg" alt="L'Établi Ludique">
 
-    <div id="bgOverlay"></div>
+    <h1>Affichage dynamique</h1>
+    <p id="subtitle">Choisissez une page</p>
 
-    <div id="content">
+    <div id="menu">
 
-    <div id="bottomRow">
+        <a class="menuCard" href="evenement.html">
+            <div class="menuTitle">Événement</div>
+            <div class="menuDesc">Le prochain événement, en grand, avec compte à rebours</div>
+        </a>
 
-        <div id="campaignLogoBox">
-            <img id="campaignLogo" src="" alt="">
-        </div>
+        <a class="menuCard" href="jour.html">
+            <div class="menuTitle">Aujourd'hui</div>
+            <div class="menuDesc">Jusqu'à 6 événements du jour même</div>
+        </a>
 
-        <img id="associationLogo" src="img/logo-etabli.svg" alt="L'Établi Ludique">
+        <a class="menuCard" href="prochain-jour.html">
+            <div class="menuTitle">Prochain jour</div>
+            <div class="menuDesc">Événements du prochain jour qui en compte</div>
+        </a>
 
-    </div>
+        <a class="menuCard" href="generateur.html">
+            <div class="menuTitle">Générateur JSON</div>
+            <div class="menuDesc">Créer la description à coller sur un événement</div>
+        </a>
 
-    <div id="topBlock">
-
-        <div id="campaignTitle"></div>
-        <div id="campaignDate"></div>
-
-    </div>
-
-    <div id="countdownBanner">
-        <span id="countdownText"></span>
-    </div>
-
-    <div id="mainRow">
-
-        <div id="photoBox">
-            <img id="campaignImage" src="" alt="">
-        </div>
-
-        <div id="eventInfo">
-
-            <div id="eventTitle"></div>
-
-            <div class="infoLine">
-                <svg viewBox="0 0 24 24" class="icon">
-                    <circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2"/>
-                    <path d="M12 7v5l3.5 2" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span id="eventHours"></span>
-            </div>
-
-            <div class="infoLine">
-                <svg viewBox="0 0 24 24" class="icon">
-                    <path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8z" fill="#e6392b"/>
-                    <circle cx="12" cy="10" r="3" fill="white"/>
-                </svg>
-                <span id="eventLocation"></span>
-            </div>
-
-            <div class="infoLine">
-                <svg viewBox="0 0 24 24" class="icon">
-                    <circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2"/>
-                    <path d="M12 8v5" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="12" cy="16" r="1" fill="white"/>
-                </svg>
-                <span id="eventTarif"></span>
-            </div>
-
-            <div class="infoLine">
-                <svg viewBox="0 0 24 24" class="icon">
-                    <path d="M4 5h16v13l-4-3H4z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M8 9h8M8 12h5" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span id="eventInscription"></span>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div id="noEvent">
-        Aucun événement à venir pour le moment.
-    </div>
-
-    </div>
-
-    <div id="bottomZone">
-
-        <div id="statusRibbon">
-            <span id="statusText"></span>
-        </div>
+        <a class="menuCard" href="admin.html">
+            <div class="menuTitle">Administration</div>
+            <div class="menuDesc">Changer le statut d'un événement (Annulé, Complet...)</div>
+        </a>
 
     </div>
 
 </div>
-
-</div>
-
-<script src="script.js"></script>
 
 </body>
 
