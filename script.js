@@ -214,6 +214,39 @@ function renderEvent(event){
 
     updateCountdown();
 
+    // Après avoir tout rempli (donc une fois la vraie hauteur du texte
+    // connue, y compris le bandeau de statut qui vient d'apparaître ou
+    // non), on vérifie que ça tient dans l'espace disponible.
+    requestAnimationFrame(fitContent);
+
+}
+
+// Réduit #content dans son ensemble (titre, compte à rebours, photo,
+// infos...) si son contenu naturel dépasse l'espace disponible au-dessus
+// du bandeau de statut, pour qu'aucun texte ne soit jamais coupé/masqué,
+// quelle que soit la longueur du titre ou des autres champs.
+function fitContent(){
+
+    const content = document.getElementById("content");
+    const screen = document.getElementById("screen");
+    const bottomZone = document.getElementById("bottomZone");
+
+    if(!content || !screen) return;
+
+    // On repart d'une échelle neutre avant de mesurer, sinon une réduction
+    // précédente fausserait la mesure du contenu naturel.
+    content.style.transform = "scale(1)";
+
+    const bottomZoneHeight = bottomZone ? bottomZone.offsetHeight : 0;
+    const available = (screen.clientHeight - bottomZoneHeight) * 0.97;
+
+    const natural = content.scrollHeight;
+
+    if(natural > available && natural > 0){
+        const scale = Math.max(0.5, available / natural);
+        content.style.transform = `scale(${scale})`;
+    }
+
 }
 
 function renderEmpty(){
