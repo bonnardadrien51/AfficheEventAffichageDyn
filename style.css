@@ -94,8 +94,6 @@ body{
 
     flex:1;
 
-    min-height:0;
-
     width:100%;
 
     display:flex;
@@ -105,6 +103,8 @@ body{
     justify-content:center;
 
     padding:32px 77px;
+
+    transform-origin:top center;
 
 }
 
@@ -219,8 +219,6 @@ body{
     gap:77px;
 
     flex:1;
-
-    min-height:0;
 
 }
 
