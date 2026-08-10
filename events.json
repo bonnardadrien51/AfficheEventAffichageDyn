@@ -1,5 +1,5 @@
 {
-  "updated": "10/08/2026 16:37:20",
+  "updated": "10/08/2026 18:02:08",
   "events": [
     {
       "uid": "6pl9tsjn43hj9g69qtk1mp559l@google.com",
@@ -10,20 +10,21 @@
       "campaign": null
     },
     {
-      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
-      "title": "Biplaces associatif",
+      "uid": "0a11kkda0q9n8qt5f9nfaec200@google.com",
+      "title": "Réalité virtuelle",
       "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T16:00:00.000Z",
-      "campaign": null
-    },
-    {
-      "uid": "3n4ng8bl9ae8din6jg5a5svhu0@google.com",
-      "title": "Buvette - Petite restauration",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T21:00:00.000Z",
-      "campaign": null
+      "end": "2026-08-22T18:00:00.000Z",
+      "campaign": {
+        "titre": "Tout Besançon vole 2026",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/VR.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
+        "logo_fond": "",
+        "fond": "",
+        "tarif": "",
+        "inscription": "",
+        "statut": ""
+      }
     },
     {
       "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
@@ -43,21 +44,20 @@
       }
     },
     {
-      "uid": "0a11kkda0q9n8qt5f9nfaec200@google.com",
-      "title": "Réalité virtuelle",
+      "uid": "3n4ng8bl9ae8din6jg5a5svhu0@google.com",
+      "title": "Buvette - Petite restauration",
       "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T18:00:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon vole 2026",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/VR.jpg",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
-        "logo_fond": "",
-        "fond": "",
-        "tarif": "",
-        "inscription": "",
-        "statut": ""
-      }
+      "end": "2026-08-22T21:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
+      "title": "Biplaces associatif",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T16:00:00.000Z",
+      "campaign": null
     },
     {
       "uid": "66o5l25861rnvktiv6vlsg8hau@google.com",
