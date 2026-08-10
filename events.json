@@ -1,5 +1,5 @@
 {
-  "updated": "10/08/2026 04:05:45",
+  "updated": "10/08/2026 06:13:28",
   "events": [
     {
       "uid": "6pl9tsjn43hj9g69qtk1mp559l@google.com",
@@ -8,6 +8,23 @@
       "start": "2026-08-22T07:30:00.000Z",
       "end": "2026-08-22T10:00:00.000Z",
       "campaign": null
+    },
+    {
+      "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
+      "title": "Création Boomerang ",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T18:00:00.000Z",
+      "campaign": {
+        "titre": "Tout Besançon vole 2026",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
+        "logo_fond": "",
+        "fond": "",
+        "tarif": "",
+        "inscription": "",
+        "statut": "Reporté"
+      }
     },
     {
       "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
@@ -41,23 +58,6 @@
       "start": "2026-08-22T08:00:00.000Z",
       "end": "2026-08-22T21:00:00.000Z",
       "campaign": null
-    },
-    {
-      "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
-      "title": "Création Boomerang ",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T18:00:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon vole 2026",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
-        "logo_fond": "",
-        "fond": "",
-        "tarif": "",
-        "inscription": "",
-        "statut": "Reporté"
-      }
     },
     {
       "uid": "66o5l25861rnvktiv6vlsg8hau@google.com",
