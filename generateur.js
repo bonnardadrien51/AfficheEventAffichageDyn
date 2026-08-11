@@ -1,6 +1,7 @@
 const fields = [
     "titre", "image", "logo", "logo_fond",
-    "fond", "tarif", "inscription", "statut"
+    "fond", "tarif", "inscription", "statut",
+    "lieu", "affichage_lieu"
 ];
 
 function generate(){
@@ -31,16 +32,20 @@ document.getElementById("f_logo_fond").addEventListener("input", (e) => {
 });
 
 fields
-    .filter(name => name !== "logo_fond")
+    .filter(name => name !== "logo_fond" && name !== "statut" && name !== "affichage_lieu")
     .forEach(name => {
         document.getElementById("f_" + name).addEventListener("input", generate);
     });
 
 document.getElementById("f_statut").addEventListener("change", generate);
+document.getElementById("f_affichage_lieu").addEventListener("change", generate);
 
 document.getElementById("resetBtn").addEventListener("click", () => {
     fields.forEach(name => {
-        document.getElementById("f_" + name).value = "";
+        const el = document.getElementById("f_" + name);
+        el.value = el.tagName === "SELECT"
+            ? (name === "affichage_lieu" ? "3" : "")
+            : "";
     });
     document.getElementById("f_logo_fond_picker").value = "#ffffff";
     generate();
