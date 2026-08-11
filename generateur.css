@@ -88,6 +88,14 @@ select{
 
 }
 
+.fieldHint{
+
+    font-size:12px;
+    font-weight:500;
+    color:#a9b0cc;
+
+}
+
 .colorRow input[type="text"]{
 
     flex:1;
