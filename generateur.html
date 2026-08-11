@@ -77,6 +77,23 @@
             </select>
         </label>
 
+        <label>
+            Lieu personnalisé
+            <input id="f_lieu" type="text" placeholder="Ex: Salle des fêtes de Palente">
+            <span class="fieldHint">Utilisé selon le mode d'affichage du lieu ci-dessous</span>
+        </label>
+
+        <label>
+            Affichage du lieu
+            <select id="f_affichage_lieu">
+                <option value="3">Mode 3 — Lieu événement, sinon lieu JSON (défaut)</option>
+                <option value="0">Mode 0 — Ne rien afficher</option>
+                <option value="1">Mode 1 — Lieu de l'événement Google Calendar</option>
+                <option value="2">Mode 2 — Lieu du JSON uniquement</option>
+                <option value="4">Mode 4 — Lieu JSON, sinon lieu événement</option>
+            </select>
+        </label>
+
         <button id="resetBtn" type="button">Réinitialiser</button>
 
     </div>
