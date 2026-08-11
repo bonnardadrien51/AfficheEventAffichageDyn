@@ -114,6 +114,54 @@ function computeCountdown(event){
 
 }
 
+// Supprime le dernier segment d'une adresse si c'est un nom de pays
+// (typiquement ", France" ajouté automatiquement par Google Calendar).
+// Heuristique : on retire la dernière partie après la dernière virgule
+// si elle ne contient pas de chiffre (donc pas un code postal ni un n°).
+function stripCountry(location){
+
+    if(!location) return "";
+
+    const parts = location.split(",").map(s => s.trim());
+
+    if(parts.length > 1){
+
+        const last = parts[parts.length - 1];
+
+        // Un code postal ou un numéro de rue contient des chiffres → on garde.
+        if(!/\d/.test(last)){
+            parts.pop();
+        }
+
+    }
+
+    return parts.join(", ");
+
+}
+
+// Résout le texte à afficher pour le lieu selon le mode :
+// 0 → rien
+// 1 → lieu de l'événement Google Calendar (sans pays)
+// 2 → lieu du JSON campaign
+// 3 → lieu événement, puis JSON si l'événement est vide
+// 4 → lieu JSON, puis événement si le JSON est vide
+function resolveLocation(eventLocation, campaignLieu, mode){
+
+    const ev = stripCountry(eventLocation || "");
+    const js = (campaignLieu || "").trim();
+    const modeNum = parseInt(mode, 10);
+
+    switch(modeNum){
+        case 0: return "";
+        case 1: return ev;
+        case 2: return js;
+        case 3: return ev || js;
+        case 4: return js || ev;
+        default: return ev || js; // comportement par défaut si absent
+    }
+
+}
+
 const STATUS_COLORS = {
     "annulé": "#c0392b",
     "annule": "#c0392b",
@@ -146,8 +194,15 @@ function renderEvent(event){
         `${formatHour(start)} – ${formatHour(end)}`;
 
     const locationEl = document.getElementById("eventLocation");
-    if(event.location){
-        locationEl.textContent = event.location;
+
+    const locationText = resolveLocation(
+        event.location,
+        campaign.lieu,
+        campaign.affichage_lieu !== undefined ? campaign.affichage_lieu : 3
+    );
+
+    if(locationText){
+        locationEl.textContent = locationText;
         locationEl.closest(".infoLine").classList.remove("hidden");
     } else {
         locationEl.closest(".infoLine").classList.add("hidden");
