@@ -1,5 +1,5 @@
 {
-  "updated": "12/08/2026 18:01:25",
+  "updated": "12/08/2026 19:30:35",
   "events": [
     {
       "uid": "6pl9tsjn43hj9g69qtk1mp559l@google.com",
@@ -7,6 +7,22 @@
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-22T07:30:00.000Z",
       "end": "2026-08-22T10:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "3n4ng8bl9ae8din6jg5a5svhu0@google.com",
+      "title": "Buvette - Petite restauration",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T21:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
+      "title": "Biplaces associatif",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T16:00:00.000Z",
       "campaign": null
     },
     {
@@ -27,14 +43,6 @@
       }
     },
     {
-      "uid": "3n4ng8bl9ae8din6jg5a5svhu0@google.com",
-      "title": "Buvette - Petite restauration",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T21:00:00.000Z",
-      "campaign": null
-    },
-    {
       "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
       "title": "Création Boomerang ",
       "location": "Le Port Douvot, Besançon",
@@ -50,14 +58,6 @@
         "inscription": "",
         "statut": ""
       }
-    },
-    {
-      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
-      "title": "Biplaces associatif",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T16:00:00.000Z",
-      "campaign": null
     },
     {
       "uid": "66o5l25861rnvktiv6vlsg8hau@google.com",
