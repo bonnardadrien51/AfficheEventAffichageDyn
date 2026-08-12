@@ -25,6 +25,13 @@
     sur Google Calendar.
 </p>
 
+<div id="tokenBar">
+    <span id="tokenStatus">Aucun token enregistré</span>
+    <input id="tokenInput" type="password" placeholder="Token GitHub (Contents: Read/Write) — pour les templates">
+    <button id="tokenSave">Enregistrer</button>
+    <button id="tokenClear">Effacer</button>
+</div>
+
 <div id="layout">
 
     <div id="formPanel">
@@ -106,6 +113,24 @@
         </div>
 
         <pre id="output"></pre>
+
+        <div id="templatePanel">
+
+            <div id="templateSaveRow">
+                <input id="templateName" type="text" placeholder="Nom du template (ex: TBV-2026)">
+                <button id="templateSaveBtn" type="button">💾 Sauvegarder</button>
+            </div>
+
+            <div id="templateListHeader">
+                <span>Templates enregistrés</span>
+                <button id="templateRefreshBtn" type="button">↻</button>
+            </div>
+
+            <div id="templateList">
+                <span class="templateHint">Entrez votre token GitHub pour accéder aux templates.</span>
+            </div>
+
+        </div>
 
     </div>
 
