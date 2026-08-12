@@ -22,7 +22,49 @@ h1{
     color:#a9b0cc;
     max-width:800px;
     line-height:1.4;
+    margin-bottom:16px;
+}
+
+#tokenBar{
+    background:#141c40;
+    border-radius:12px;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
     margin-bottom:24px;
+    max-width:800px;
+}
+
+#tokenStatus{
+    font-weight:700;
+    margin-right:auto;
+    font-size:14px;
+}
+
+#tokenInput{
+    flex:1;
+    min-width:220px;
+    padding:8px 12px;
+    border-radius:8px;
+    border:none;
+    font-size:14px;
+}
+
+#tokenBar button{
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    background:#2e5cf0;
+    color:white;
+    font-size:14px;
+}
+
+#tokenClear{
+    background:#3a4066;
 }
 
 #layout{
@@ -168,3 +210,139 @@ select{
     color:#d7defc;
 
 }
+
+/**************************************************
+    TEMPLATES
+**************************************************/
+
+#templatePanel{
+
+    margin-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    padding-top:16px;
+
+}
+
+#templateSaveRow{
+
+    display:flex;
+    gap:10px;
+    margin-bottom:14px;
+
+}
+
+#templateSaveRow input{
+
+    flex:1;
+    min-width:0;
+    padding:8px 12px;
+    border-radius:8px;
+    border:none;
+    font-size:14px;
+    font-family:inherit;
+
+}
+
+#templateSaveBtn{
+
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    background:#2fae5f;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+
+}
+
+#templateListHeader{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:10px;
+
+}
+
+#templateRefreshBtn{
+
+    padding:4px 10px;
+    border:none;
+    border-radius:6px;
+    background:#3a4066;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+
+}
+
+#templateList{
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+}
+
+.templateItem{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#0a1330;
+    border-radius:8px;
+    padding:8px 12px;
+
+}
+
+.templateItem .templateItemName{
+
+    flex:1;
+    font-size:14px;
+
+}
+
+.templateItem button{
+
+    padding:4px 10px;
+    border:none;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+
+}
+
+.templateLoadBtn{
+
+    background:#2e5cf0;
+    color:white;
+
+}
+
+.templateDeleteBtn{
+
+    background:#c0392b;
+    color:white;
+
+}
+
+.templateHint{
+
+    color:#a9b0cc;
+    font-size:13px;
+
+}
+
+.templateMsg{
+
+    font-size:13px;
+    padding:6px 0;
+
+}
+
+.templateMsg.ok{ color:#2fae5f; }
+.templateMsg.err{ color:#ff8080; }
