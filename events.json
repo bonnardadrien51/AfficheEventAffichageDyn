@@ -1,5 +1,5 @@
 {
-  "updated": "19/08/2026 23:53:59",
+  "updated": "20/08/2026 00:28:28",
   "events": [
     {
       "uid": "6pl9tsjn43hj9g69qtk1mp559l@google.com",
@@ -35,6 +35,14 @@
       }
     },
     {
+      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
+      "title": "Biplaces associatif",
+      "location": "Le Port Douvot, 25000 Besançon, France",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T16:00:00.000Z",
+      "campaign": null
+    },
+    {
       "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
       "title": "Création Boomerang ",
       "location": "Le Port Douvot, Besançon",
@@ -50,14 +58,6 @@
         "inscription": "",
         "statut": ""
       }
-    },
-    {
-      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
-      "title": "Biplaces associatif",
-      "location": "Le Port Douvot, 25000 Besançon, France",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T16:00:00.000Z",
-      "campaign": null
     },
     {
       "uid": "66o5l25861rnvktiv6vlsg8hau@google.com",
