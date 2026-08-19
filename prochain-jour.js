@@ -1,153 +1,86 @@
-const DATA_URL = "events.json";
-const OVERRIDES_URL = "status-overrides.json";
-const MAX_EVENTS = 6;
+<!DOCTYPE html>
+<html lang="fr">
 
-const REFRESH_MS = 60 * 1000;
+<head>
 
-const STATUS_COLORS = {
-    "annulé": "#c0392b",
-    "annule": "#c0392b",
-    "complet": "#e08e0b",
-    "reporté": "#6c5ce7",
-    "reporte": "#6c5ce7"
-};
+    <meta charset="UTF-8">
 
-const shortWeekdays = ["DIM","LUN","MAR","MER","JEU","VEN","SAM"];
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-function dateOnly(d){
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-}
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-function formatHour(date){
-    const h = date.getHours();
-    const m = date.getMinutes();
-    return m === 0 ? `${h}h` : `${h}h${String(m).padStart(2,"0")}`;
-}
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-// Trouve la date (jour calendaire) du plus proche événement strictement
-// après aujourd'hui - pas forcément demain, si demain n'a rien de prévu.
-function findNextEventDay(events){
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    const today = dateOnly(new Date());
+    <title>
+        Affichage dynamique - Prochain jour d'événements
+    </title>
 
-    const futureDays = events
-        .map(e => dateOnly(new Date(e.start)).getTime())
-        .filter(t => t > today.getTime())
-        .sort((a,b) => a - b);
+    <link
+        rel="stylesheet"
+        href="jour.css"
+    >
 
-    return futureDays.length ? new Date(futureDays[0]) : null;
+</head>
 
-}
 
-function renderCard(event, overrides){
+<body>
 
-    const start = new Date(event.start);
-    const end = new Date(event.end);
+<div id="screen">
 
-    const statut =
-        (overrides[event.uid] && overrides[event.uid].statut) ||
-        (event.campaign && event.campaign.statut) ||
-        "";
+    <div id="header">
 
-    const card = document.createElement("div");
-    card.className = "eventCard";
+        <img
+            id="associationLogo"
+            src="img/logo-etabli.svg"
+            alt="L'Établi Ludique"
+        >
 
-    const badgeHtml = statut ? `
-        <div class="statusBadge" style="background:${STATUS_COLORS[statut.trim().toLowerCase()] || "#c0392b"}">
-            ${statut}
-        </div>
-    ` : "";
+        <div id="headerText">
 
-    const thumbHtml = (event.campaign && event.campaign.image) ? `
-        <div class="thumb">
-            <img src="${event.campaign.image}" alt="">
-        </div>
-    ` : "";
-
-    card.innerHTML = `
-        <div class="date">
-            <div class="weekday">${shortWeekdays[start.getDay()]}</div>
-            <div class="day">${start.getDate()}</div>
-        </div>
-        ${thumbHtml}
-        <div class="infoBlock">
-            <div class="textCol">
-                <div class="title">${event.title}</div>
-                <div class="meta">
-                    <svg viewBox="0 0 24 24" class="icon">
-                        <circle cx="12" cy="12" r="9" fill="none" stroke="#3a4160" stroke-width="2"/>
-                        <path d="M12 7v5l3.5 2" fill="none" stroke="#3a4160" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <span>${formatHour(start)} – ${formatHour(end)}</span>
-                    ${event.location ? `
-                        <svg viewBox="0 0 24 24" class="icon">
-                            <path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8z" fill="#e6392b"/>
-                            <circle cx="12" cy="10" r="3" fill="white"/>
-                        </svg>
-                        <span>${event.location}</span>
-                    ` : ""}
-                </div>
+            <div id="pageTitle">
+                Prochain jour d'événements
             </div>
-            ${badgeHtml}
+
+            <div id="pageDate"></div>
+
         </div>
-    `;
 
-    return card;
+    </div>
 
-}
 
-async function loadEvents(){
+    <div id="eventGrid"></div>
 
-    const grid = document.getElementById("eventGrid");
 
-    let events = [];
-    let overrides = {};
+    <div id="noEvent">
+        Aucun événement à venir.
+    </div>
 
-    try {
-        const res = await fetch(DATA_URL + "?t=" + Date.now());
-        const json = await res.json();
-        events = json.events || [];
-    } catch(err){
-        console.error("Erreur de chargement de events.json :", err);
-        return;
-    }
 
-    try {
-        const res = await fetch(OVERRIDES_URL + "?t=" + Date.now());
-        overrides = await res.json();
-    } catch(err){
-        // pas grave si absent
-    }
+    <div id="pageIndicator"></div>
 
-    const nextDay = findNextEventDay(events);
+</div>
 
-    if(!nextDay){
-        document.body.classList.add("empty");
-        return;
-    }
 
-    const dayEvents = events
-        .filter(e => dateOnly(new Date(e.start)).getTime() === nextDay.getTime())
-        .slice(0, MAX_EVENTS);
+<script src="prochain-jour.js"></script>
 
-    document.getElementById("pageDate").textContent =
-        nextDay.toLocaleDateString("fr-FR", {
-            weekday:"long", day:"2-digit", month:"long", year:"numeric"
-        });
+<script src="pagination.js"></script>
 
-    if(!dayEvents.length){
-        document.body.classList.add("empty");
-        return;
-    }
 
-    document.body.classList.remove("empty");
+</body>
 
-    grid.innerHTML = "";
-    dayEvents.forEach(event => {
-        grid.appendChild(renderCard(event, overrides));
-    });
-
-}
-
-loadEvents();
-setInterval(loadEvents, REFRESH_MS);
+</html>
