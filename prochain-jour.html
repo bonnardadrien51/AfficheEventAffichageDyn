@@ -8,7 +8,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap"
+        rel="stylesheet"
+    >
 
     <title>Affichage dynamique - Prochain jour d'événements</title>
 
@@ -16,30 +20,53 @@
 
 </head>
 
+
 <body>
 
 <div id="screen">
 
     <div id="header">
 
-        <img id="associationLogo" src="img/logo-etabli.svg" alt="L'Établi Ludique">
+        <img
+            id="associationLogo"
+            src="img/logo-etabli.svg"
+            alt="L'Établi Ludique"
+        >
 
         <div id="headerText">
-            <div id="pageTitle">Prochain jour d'événements</div>
+
+            <div id="pageTitle">
+                Prochain jour d'événements
+            </div>
+
             <div id="pageDate"></div>
+
         </div>
 
     </div>
 
+
+    <!-- Zone contenant les événements -->
     <div id="eventGrid"></div>
+
 
     <div id="noEvent">
         Aucun événement à venir.
     </div>
 
+
+    <!-- Indicateur de page -->
+    <div id="pageIndicator"></div>
+
 </div>
 
+
+<!-- Ton JavaScript actuel qui récupère les événements -->
 <script src="prochain-jour.js"></script>
+
+<!-- Nouveau JavaScript pour le défilement -->
+<script src="prochain-jour-pagination.js"></script>
+
 
 </body>
 
