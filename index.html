@@ -4,56 +4,676 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 
-    <title>Affichage dynamique - L'Établi Ludique</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="menu.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <title>
+        Affichage dynamique - L'Établi Ludique
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="menu.css"
+    >
+
+    <style>
+
+        /*
+        ========================================================
+        SÉLECTION DES JOURNÉES
+        ========================================================
+        */
+
+        #daysContainer {
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: 30px auto 0;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(
+                        240px,
+                        1fr
+                    )
+                );
+
+            gap: 16px;
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        CARTE JOUR
+        --------------------------------------------------------
+        */
+
+        .dayCard {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 120px;
+
+            padding: 20px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+
+        }
+
+
+        .dayCard:hover {
+
+            transform:
+                translateY(-4px);
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.30
+                );
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        JOUR
+        --------------------------------------------------------
+        */
+
+        .dayWeekday {
+
+            font-size: 1.1rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            opacity: 0.75;
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        DATE
+        --------------------------------------------------------
+        */
+
+        .dayDate {
+
+            margin-top: 3px;
+
+            font-size: 1.8rem;
+
+            font-weight: 800;
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        NOMBRE D'ÉVÉNEMENTS
+        --------------------------------------------------------
+        */
+
+        .dayEvents {
+
+            margin-top: 5px;
+
+            font-size: 0.95rem;
+
+            opacity: 0.65;
+
+        }
+
+
+        /*
+        ========================================================
+        CHARGEMENT
+        ========================================================
+        */
+
+        #loading {
+
+            margin-top: 40px;
+
+            opacity: 0.7;
+
+        }
+
+
+        /*
+        ========================================================
+        AUCUN ÉVÉNEMENT
+        ========================================================
+        */
+
+        #noDays {
+
+            margin-top: 40px;
+
+            opacity: 0.7;
+
+            display: none;
+
+        }
+
+
+        /*
+        ========================================================
+        ERREUR
+        ========================================================
+        */
+
+        #error {
+
+            margin-top: 40px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(
+                    192,
+                    57,
+                    43,
+                    0.25
+                );
+
+            display: none;
+
+        }
+
+    </style>
 
 </head>
+
 
 <body>
 
 <div id="wrapper">
 
-    <img id="logo" src="img/logo-etabli.svg" alt="L'Établi Ludique">
+    <img
+        id="logo"
+        src="img/logo-etabli.svg"
+        alt="L'Établi Ludique"
+    >
 
-    <h1>Affichage dynamique</h1>
-    <p id="subtitle">Choisissez une page</p>
+    <h1>
+        Affichage dynamique
+    </h1>
 
-    <div id="menu">
+    <p id="subtitle">
+        Choisissez une journée
+    </p>
 
-        <a class="menuCard" href="evenement.html">
-            <div class="menuTitle">Événement</div>
-            <div class="menuDesc">Le prochain événement, en grand, avec compte à rebours</div>
-        </a>
 
-        <a class="menuCard" href="jour.html">
-            <div class="menuTitle">Aujourd'hui</div>
-            <div class="menuDesc">Jusqu'à 6 événements du jour même</div>
-        </a>
+    <!-- =====================================================
+         LISTE DES JOURNÉES
+         ===================================================== -->
 
-        <a class="menuCard" href="prochain-jour.html">
-            <div class="menuTitle">Prochain jour</div>
-            <div class="menuDesc">Événements du prochain jour qui en compte</div>
-        </a>
+    <div id="daysContainer"></div>
 
-        <a class="menuCard" href="generateur.html">
-            <div class="menuTitle">Générateur JSON</div>
-            <div class="menuDesc">Créer la description à coller sur un événement</div>
-        </a>
 
-        <a class="menuCard" href="admin.html">
-            <div class="menuTitle">Administration</div>
-            <div class="menuDesc">Changer le statut d'un événement (Annulé, Complet...)</div>
-        </a>
+    <div id="loading">
+        Chargement des événements...
+    </div>
 
+
+    <div id="noDays">
+        Aucun événement à venir.
+    </div>
+
+
+    <div id="error">
+        Impossible de charger les événements.
     </div>
 
 </div>
+
+
+<script>
+
+    /*
+    ============================================================
+    CONFIGURATION
+    ============================================================
+    */
+
+    const DATA_URL =
+        "events.json";
+
+
+    /*
+    ============================================================
+    OUTILS
+    ============================================================
+    */
+
+    function dateKey(date) {
+
+        const year =
+            date.getFullYear();
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
+
+        return `${year}-${month}-${day}`;
+
+    }
+
+
+    /*
+    ============================================================
+    FORMAT JOUR
+    ============================================================
+    */
+
+    function formatWeekday(date) {
+
+        return date.toLocaleDateString(
+            "fr-FR",
+            {
+                weekday: "long"
+            }
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    FORMAT DATE
+    ============================================================
+    */
+
+    function formatDate(date) {
+
+        return date.toLocaleDateString(
+            "fr-FR",
+            {
+                day: "2-digit",
+                month: "long"
+            }
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    CHARGEMENT
+    ============================================================
+    */
+
+    async function loadDays() {
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+        const container =
+            document.getElementById(
+                "daysContainer"
+            );
+
+        const noDays =
+            document.getElementById(
+                "noDays"
+            );
+
+        const error =
+            document.getElementById(
+                "error"
+            );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    DATA_URL +
+                    "?t=" +
+                    Date.now()
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Impossible de charger events.json"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const events =
+                data.events || [];
+
+
+            /*
+            ----------------------------------------------------
+            GROUPEMENT PAR JOUR
+            ----------------------------------------------------
+            */
+
+            const days =
+                new Map();
+
+
+            const now =
+                new Date();
+
+
+            events.forEach(
+                event => {
+
+                    if (!event.start) {
+                        return;
+                    }
+
+
+                    /*
+                    Événement terminé ?
+                    */
+
+                    if (event.end) {
+
+                        const end =
+                            new Date(
+                                event.end
+                            );
+
+
+                        if (
+                            end.getTime()
+                            <=
+                            now.getTime()
+                        ) {
+
+                            return;
+
+                        }
+
+                    }
+
+
+                    const start =
+                        new Date(
+                            event.start
+                        );
+
+
+                    const key =
+                        dateKey(
+                            start
+                        );
+
+
+                    if (!days.has(key)) {
+
+                        days.set(
+                            key,
+                            {
+                                date: start,
+                                events: []
+                            }
+                        );
+
+                    }
+
+
+                    days
+                        .get(key)
+                        .events
+                        .push(event);
+
+                }
+            );
+
+
+            /*
+            ----------------------------------------------------
+            TRI DES JOURNÉES
+            ----------------------------------------------------
+            */
+
+            const sortedDays =
+                Array.from(
+                    days.values()
+                )
+                .sort(
+                    (a, b) =>
+                        a.date.getTime()
+                        -
+                        b.date.getTime()
+                );
+
+
+            loading.style.display =
+                "none";
+
+
+            /*
+            ----------------------------------------------------
+            AUCUNE JOURNÉE
+            ----------------------------------------------------
+            */
+
+            if (!sortedDays.length) {
+
+                noDays.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            /*
+            ----------------------------------------------------
+            CRÉATION DES BOUTONS
+            ----------------------------------------------------
+            */
+
+            sortedDays.forEach(
+                day => {
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.className =
+                        "dayCard";
+
+
+                    /*
+                    URL :
+
+                    prochain-jour.html?date=2026-08-22
+                    */
+
+                    const key =
+                        dateKey(
+                            day.date
+                        );
+
+
+                    link.href =
+                        "prochain-jour.html?date="
+                        +
+                        encodeURIComponent(
+                            key
+                        );
+
+
+                    const weekday =
+                        formatWeekday(
+                            day.date
+                        );
+
+
+                    const formattedDate =
+                        formatDate(
+                            day.date
+                        );
+
+
+                    const count =
+                        day.events.length;
+
+
+                    const eventText =
+                        count === 1
+                        ? "1 événement"
+                        : `${count} événements`;
+
+
+                    link.innerHTML = `
+
+                        <div class="dayWeekday">
+                            ${weekday}
+                        </div>
+
+                        <div class="dayDate">
+                            ${formattedDate}
+                        </div>
+
+                        <div class="dayEvents">
+                            ${eventText}
+                        </div>
+
+                    `;
+
+
+                    container.appendChild(
+                        link
+                    );
+
+                }
+            );
+
+        }
+        catch (errorObject) {
+
+            console.error(
+                errorObject
+            );
+
+
+            loading.style.display =
+                "none";
+
+
+            error.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+    INITIALISATION
+    ============================================================
+    */
+
+    loadDays();
+
+</script>
+
 
 </body>
 
