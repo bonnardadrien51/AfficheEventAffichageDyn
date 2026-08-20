@@ -7,7 +7,7 @@ const fs = require("fs");
 // ============================================================
 
 const CALENDAR_URL =
-  "https://calendar.google.com/calendar/ical/cb4a8bd6e4b215de55e3e17b61675676754397faeb48a066ba961be93aaeecb4%40group.calendar.google.com/public/basic.ics";
+  "https://calendar.google.com/calendar/ical/cb4a8bd6e4b215de55e3e17b61675676754397faeb48a066ba961be93aaeec4b%40group.calendar.google.com/public/basic.ics";
 
 // Nombre maximum d'événements conservés
 const MAX_EVENTS = 50;
