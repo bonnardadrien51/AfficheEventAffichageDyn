@@ -2,14 +2,9 @@ const axios = require("axios");
 const ical = require("node-ical");
 const fs = require("fs");
 
-// ============================================================
-// CONFIGURATION
-// ============================================================
-
 const CALENDAR_URL =
   "https://calendar.google.com/calendar/ical/cb4a8bd6e4b215de55e3e17b61675676754397faeb48a066ba961be93aaeec4b%40group.calendar.google.com/public/basic.ics";
 
-// Nombre maximum d'événements conservés
 const MAX_EVENTS = 50;
 
 // Fichiers de sortie
