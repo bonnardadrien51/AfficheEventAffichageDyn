@@ -1,0 +1,573 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    background: #0a1330;
+    color: white;
+
+    font-family:
+        "Baloo 2",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    min-height: 100vh;
+
+    padding: 24px;
+}
+
+
+/* =========================================================
+   EN-TÊTE
+========================================================= */
+
+.pageHeader {
+
+    max-width: 1400px;
+
+    margin:
+        0 auto
+        28px auto;
+
+}
+
+
+.pageHeader h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.pageHeader p {
+
+    color: #a9b0cc;
+
+    font-size: 16px;
+
+}
+
+
+.pageHeader strong {
+
+    color: white;
+
+}
+
+
+/* =========================================================
+   BIBLIOTHÈQUE
+========================================================= */
+
+#imageLibrary {
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+}
+
+
+.libraryLoading,
+.libraryError,
+.libraryEmpty {
+
+    background: #141c40;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    color: #a9b0cc;
+
+}
+
+
+/* =========================================================
+   BARRE DE RECHERCHE
+========================================================= */
+
+.libraryToolbar {
+
+    background: #141c40;
+
+    border-radius: 14px;
+
+    padding: 16px 18px;
+
+    margin-bottom: 28px;
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+}
+
+
+.librarySearch {
+
+    flex: 1;
+
+    min-width: 260px;
+
+    padding: 11px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+}
+
+
+.libraryCount {
+
+    color: #a9b0cc;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   DOSSIERS
+========================================================= */
+
+.imageFolder {
+
+    margin-bottom: 34px;
+
+}
+
+
+.folderTitle {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.folderTitle h2 {
+
+    font-size: 22px;
+
+}
+
+
+.folderTitle span {
+
+    color: #a9b0cc;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   GRILLE
+========================================================= */
+
+.imageGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(190px, 1fr)
+        );
+
+    gap: 16px;
+
+}
+
+
+/* =========================================================
+   CARTE IMAGE
+========================================================= */
+
+.imageCard {
+
+    background: #141c40;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+
+}
+
+
+.imageCard:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, .30);
+
+}
+
+
+.imagePreview {
+
+    height: 160px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 12px;
+
+}
+
+
+.imagePreview img {
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    object-fit: contain;
+
+}
+
+
+.imageCardInfo {
+
+    padding: 10px 12px 12px;
+
+}
+
+
+.imageName {
+
+    font-weight: 700;
+
+    font-size: 15px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.imagePath {
+
+    margin-top: 2px;
+
+    color: #8f98bb;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* =========================================================
+   MODALE
+========================================================= */
+
+.imageModal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+}
+
+
+.imageModal.open {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.modalOverlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, .78);
+
+}
+
+
+.modalContent {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: min(
+        900px,
+        calc(100vw - 40px)
+    );
+
+    max-height:
+        calc(100vh - 40px);
+
+    overflow: auto;
+
+    background: #141c40;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, .5);
+
+}
+
+
+.modalContent > img {
+
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 60vh;
+
+    width: auto;
+
+    height: auto;
+
+    margin: 0 auto;
+
+    border-radius: 8px;
+
+    background: white;
+
+    object-fit: contain;
+
+}
+
+
+.modalClose {
+
+    position: absolute;
+
+    right: 12px;
+
+    top: 8px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, .55);
+
+    color: white;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+}
+
+
+.modalInfo {
+
+    padding-top: 16px;
+
+}
+
+
+.modalFileName {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+}
+
+
+.modalPath {
+
+    margin-top: 4px;
+
+    color: #a9b0cc;
+
+    font-size: 13px;
+
+    word-break: break-all;
+
+}
+
+
+.modalActions {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 16px;
+
+}
+
+
+.primaryButton,
+.secondaryButton {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 9px 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+}
+
+
+.primaryButton {
+
+    background: #2e5cf0;
+
+    color: white;
+
+}
+
+
+.secondaryButton {
+
+    background: #3a4066;
+
+    color: white;
+
+}
+
+
+.copyMessage {
+
+    min-height: 20px;
+
+    margin-top: 8px;
+
+    color: #2fae5f;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+
+        padding: 16px;
+
+    }
+
+
+    .imageGrid {
+
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(145px, 1fr)
+            );
+
+        gap: 10px;
+
+    }
+
+
+    .imagePreview {
+
+        height: 120px;
+
+    }
+
+
+    .pageHeader h1 {
+
+        font-size: 26px;
+
+    }
+
+}
