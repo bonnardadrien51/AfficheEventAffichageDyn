@@ -3,19 +3,13 @@ const OVERRIDES_URL = "status-overrides.json";
 
 const REFRESH_MS = 60 * 1000;
 
-
 const STATUS_COLORS = {
-
     "annulé": "#c0392b",
     "annule": "#c0392b",
-
     "complet": "#e08e0b",
-
     "reporté": "#6c5ce7",
     "reporte": "#6c5ce7"
-
 };
-
 
 const shortWeekdays = [
     "DIM",
@@ -29,66 +23,48 @@ const shortWeekdays = [
 
 
 function dateOnly(date) {
-
     return new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate()
     );
-
 }
 
 
 function isToday(date) {
 
-    const today =
-        dateOnly(new Date());
+    const today = dateOnly(new Date());
 
     return (
         dateOnly(date).getTime()
         ===
         today.getTime()
     );
-
 }
 
 
 function formatHour(date) {
 
-    const h =
-        date.getHours();
-
-    const m =
-        date.getMinutes();
+    const h = date.getHours();
+    const m = date.getMinutes();
 
     return m === 0
         ? `${h}h`
         : `${h}h${String(m).padStart(2, "0")}`;
-
 }
 
 
 function renderCard(event, overrides) {
 
-    const start =
-        new Date(event.start);
-
-    const end =
-        new Date(event.end);
-
+    const start = new Date(event.start);
+    const end = new Date(event.end);
 
     const statut =
-        (
-            overrides[event.uid]
-            &&
-            overrides[event.uid].statut
-        )
+        (overrides[event.uid] &&
+            overrides[event.uid].statut)
         ||
-        (
-            event.campaign
-            &&
-            event.campaign.statut
-        )
+        (event.campaign &&
+            event.campaign.statut)
         ||
         "";
 
@@ -96,12 +72,10 @@ function renderCard(event, overrides) {
     const card =
         document.createElement("div");
 
-    card.className =
-        "eventCard";
+    card.className = "eventCard";
 
 
-    const badgeHtml =
-        statut
+    const badgeHtml = statut
         ? `
             <div
                 class="statusBadge"
@@ -109,12 +83,8 @@ function renderCard(event, overrides) {
                     background:
                     ${
                         STATUS_COLORS[
-                            statut
-                                .trim()
-                                .toLowerCase()
-                        ]
-                        ||
-                        "#c0392b"
+                            statut.trim().toLowerCase()
+                        ] || "#c0392b"
                     }
                 "
             >
@@ -126,8 +96,7 @@ function renderCard(event, overrides) {
 
     const thumbHtml =
         (
-            event.campaign
-            &&
+            event.campaign &&
             event.campaign.image
         )
         ? `
@@ -228,14 +197,12 @@ function renderCard(event, overrides) {
 
                             </svg>
 
-
                             <span>
                                 ${event.location}
                             </span>
 
                         `
-                        :
-                        ""
+                        : ""
                     }
 
                 </div>
@@ -251,19 +218,16 @@ function renderCard(event, overrides) {
 
 
     return card;
-
 }
 
 
 async function loadEvents() {
 
     const grid =
-        document.getElementById(
-            "eventGrid"
-        );
+        document.getElementById("eventGrid");
+
 
     let events = [];
-
     let overrides = {};
 
 
@@ -299,7 +263,6 @@ async function loadEvents() {
         events =
             json.events || [];
 
-
     }
     catch (error) {
 
@@ -309,7 +272,6 @@ async function loadEvents() {
         );
 
         return;
-
     }
 
 
@@ -340,7 +302,7 @@ async function loadEvents() {
     catch (error) {
 
         /*
-        Le fichier peut être absent.
+        Le fichier peut ne pas exister.
         Ce n'est pas bloquant.
         */
 
@@ -352,6 +314,13 @@ async function loadEvents() {
     /*
     ============================================================
     ÉVÉNEMENTS D'AUJOURD'HUI
+    ============================================================
+    
+    IMPORTANT :
+    Aucun .slice(0, 6) ici.
+
+    Tous les événements du jour sont chargés.
+    pagination.js se charge ensuite d'en afficher 6.
     ============================================================
     */
 
@@ -373,15 +342,13 @@ async function loadEvents() {
     document.getElementById(
         "pageDate"
     ).textContent =
-
         new Date().toLocaleDateString(
             "fr-FR",
             {
                 weekday: "long",
                 day: "2-digit",
                 month: "long",
-                year: "numeric",
-                timeZone: "Europe/Paris"
+                year: "numeric"
             }
         );
 
@@ -401,7 +368,6 @@ async function loadEvents() {
         );
 
         return;
-
     }
 
 
@@ -431,12 +397,23 @@ async function loadEvents() {
 
         }
     );
-
 }
 
 
+/*
+============================================================
+CHARGEMENT INITIAL
+============================================================
+*/
+
 loadEvents();
 
+
+/*
+============================================================
+ACTUALISATION TOUTES LES 60 SECONDES
+============================================================
+*/
 
 setInterval(
     loadEvents,
