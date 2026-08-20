@@ -1,19 +1,19 @@
 const DATA_URL = "events.json";
 const OVERRIDES_URL = "status-overrides.json";
 
+// Recharge les données toutes les 60 secondes
 const REFRESH_MS = 60 * 1000;
+
+// Vérifie les événements toutes les 10 secondes
+const CHECK_EVENTS_MS = 10 * 1000;
 
 
 const STATUS_COLORS = {
-
     "annulé": "#c0392b",
     "annule": "#c0392b",
-
     "complet": "#e08e0b",
-
     "reporté": "#6c5ce7",
     "reporte": "#6c5ce7"
-
 };
 
 
@@ -28,6 +28,22 @@ const shortWeekdays = [
 ];
 
 
+/*
+============================================================
+DONNÉES EN MÉMOIRE
+============================================================
+*/
+
+let allEvents = [];
+let overrides = {};
+
+
+/*
+============================================================
+OUTILS DE DATE
+============================================================
+*/
+
 function dateOnly(date) {
 
     return new Date(
@@ -35,57 +51,112 @@ function dateOnly(date) {
         date.getMonth(),
         date.getDate()
     );
-
 }
 
 
 /*
 ============================================================
-TROUVER LE PROCHAIN JOUR AVEC AU MOINS UN ÉVÉNEMENT
+ÉVÉNEMENT TERMINÉ ?
 ============================================================
 */
 
-function findNextEventDay(events) {
+function isFinished(event) {
+
+    if (!event.end) {
+        return false;
+    }
+
+    const end =
+        new Date(event.end);
+
+    return end.getTime() <= Date.now();
+}
+
+
+/*
+============================================================
+TROUVER LE PROCHAIN JOUR AVEC UN ÉVÉNEMENT
+============================================================
+
+On cherche uniquement les événements :
+
+- dans le futur
+- non terminés
+- après aujourd'hui
+
+Le premier jour trouvé est sélectionné.
+============================================================
+*/
+
+function findNextEventDay() {
 
     const today =
         dateOnly(new Date());
 
 
-    const futureDays =
-        events
+    const futureEvents =
+        allEvents
+
+            .filter(
+                event =>
+                    event.start &&
+                    !isFinished(event)
+            )
+
+            .filter(
+                event =>
+                    dateOnly(
+                        new Date(event.start)
+                    ).getTime()
+                    >
+                    today.getTime()
+            );
+
+
+    if (!futureEvents.length) {
+
+        return null;
+    }
+
+
+    /*
+    ------------------------------------------------------------
+    Récupération de toutes les dates futures
+    ------------------------------------------------------------
+    */
+
+    const dates =
+        futureEvents
 
             .map(
                 event =>
                     dateOnly(
                         new Date(event.start)
-                    ).getTime()
-            )
-
-            .filter(
-                timestamp =>
-                    timestamp >
-                    today.getTime()
+                    )
             )
 
             .sort(
                 (a, b) =>
-                    a - b
+                    a.getTime() -
+                    b.getTime()
             );
 
 
-    if (!futureDays.length) {
+    /*
+    ------------------------------------------------------------
+    Première date disponible
+    ------------------------------------------------------------
+    */
 
-        return null;
-
-    }
-
-
-    return new Date(
-        futureDays[0]
-    );
-
+    return dates[0];
 }
 
+
+/*
+============================================================
+FORMATER L'HEURE
+============================================================
+*/
 
 function formatHour(date) {
 
@@ -95,15 +166,19 @@ function formatHour(date) {
     const m =
         date.getMinutes();
 
-
     return m === 0
         ? `${h}h`
         : `${h}h${String(m).padStart(2, "0")}`;
-
 }
 
 
-function renderCard(event, overrides) {
+/*
+============================================================
+CRÉATION D'UNE CARTE
+============================================================
+*/
+
+function renderCard(event) {
 
     const start =
         new Date(event.start);
@@ -114,14 +189,12 @@ function renderCard(event, overrides) {
 
     const statut =
         (
-            overrides[event.uid]
-            &&
+            overrides[event.uid] &&
             overrides[event.uid].statut
         )
         ||
         (
-            event.campaign
-            &&
+            event.campaign &&
             event.campaign.statut
         )
         ||
@@ -131,10 +204,15 @@ function renderCard(event, overrides) {
     const card =
         document.createElement("div");
 
-
     card.className =
         "eventCard";
 
+
+    /*
+    ------------------------------------------------------------
+    BADGE
+    ------------------------------------------------------------
+    */
 
     const badgeHtml =
         statut
@@ -146,9 +224,7 @@ function renderCard(event, overrides) {
                     background:
                     ${
                         STATUS_COLORS[
-                            statut
-                                .trim()
-                                .toLowerCase()
+                            statut.trim().toLowerCase()
                         ]
                         ||
                         "#c0392b"
@@ -162,10 +238,15 @@ function renderCard(event, overrides) {
         "";
 
 
+    /*
+    ------------------------------------------------------------
+    IMAGE
+    ------------------------------------------------------------
+    */
+
     const thumbHtml =
         (
-            event.campaign
-            &&
+            event.campaign &&
             event.campaign.image
         )
         ?
@@ -182,6 +263,12 @@ function renderCard(event, overrides) {
         :
         "";
 
+
+    /*
+    ------------------------------------------------------------
+    CONTENU
+    ------------------------------------------------------------
+    */
 
     card.innerHTML = `
 
@@ -291,11 +378,66 @@ function renderCard(event, overrides) {
 
 
     return card;
-
 }
 
 
-async function loadEvents() {
+/*
+============================================================
+RÉCUPÉRER LES ÉVÉNEMENTS DU PROCHAIN JOUR
+============================================================
+*/
+
+function getNextDayEvents(nextDay) {
+
+    if (!nextDay) {
+        return [];
+    }
+
+
+    return allEvents
+
+        .filter(
+            event =>
+                event.start &&
+                dateOnly(
+                    new Date(event.start)
+                ).getTime()
+                ===
+                nextDay.getTime()
+        )
+
+        /*
+        --------------------------------------------------------
+        Retirer les événements terminés
+        --------------------------------------------------------
+        */
+
+        .filter(
+            event =>
+                !isFinished(event)
+        )
+
+        /*
+        --------------------------------------------------------
+        Trier par heure de début
+        --------------------------------------------------------
+        */
+
+        .sort(
+            (a, b) =>
+                new Date(a.start) -
+                new Date(b.start)
+        );
+}
+
+
+/*
+============================================================
+AFFICHER LES ÉVÉNEMENTS
+============================================================
+*/
+
+function renderEvents() {
 
     const grid =
         document.getElementById(
@@ -303,16 +445,127 @@ async function loadEvents() {
         );
 
 
-    let events = [];
+    /*
+    ------------------------------------------------------------
+    TROUVER LE PROCHAIN JOUR
+    ------------------------------------------------------------
+    */
 
-    let overrides = {};
+    const nextDay =
+        findNextEventDay();
 
 
     /*
-    ============================================================
-    EVENTS.JSON
-    ============================================================
+    ------------------------------------------------------------
+    AUCUN ÉVÉNEMENT FUTUR
+    ------------------------------------------------------------
     */
+
+    if (!nextDay) {
+
+        grid.innerHTML = "";
+
+        document.body.classList.add(
+            "empty"
+        );
+
+        document.getElementById(
+            "pageDate"
+        ).textContent = "";
+
+        return;
+    }
+
+
+    /*
+    ------------------------------------------------------------
+    ÉVÉNEMENTS DE CE JOUR
+    ------------------------------------------------------------
+    */
+
+    const nextDayEvents =
+        getNextDayEvents(
+            nextDay
+        );
+
+
+    /*
+    ------------------------------------------------------------
+    SÉCURITÉ
+    ------------------------------------------------------------
+    */
+
+    if (!nextDayEvents.length) {
+
+        grid.innerHTML = "";
+
+        document.body.classList.add(
+            "empty"
+        );
+
+        return;
+    }
+
+
+    document.body.classList.remove(
+        "empty"
+    );
+
+
+    /*
+    ------------------------------------------------------------
+    DATE AFFICHÉE
+    ------------------------------------------------------------
+    */
+
+    document.getElementById(
+        "pageDate"
+    ).textContent =
+        nextDay.toLocaleDateString(
+            "fr-FR",
+            {
+                weekday: "long",
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    /*
+    ------------------------------------------------------------
+    AFFICHER TOUS LES ÉVÉNEMENTS
+    ------------------------------------------------------------
+    
+    Pas de .slice(0, 6).
+
+    pagination.js s'occupe de l'affichage
+    de 6 événements maximum par page.
+    ------------------------------------------------------------
+    */
+
+    grid.innerHTML = "";
+
+
+    nextDayEvents.forEach(
+        event => {
+
+            grid.appendChild(
+                renderCard(event)
+            );
+
+        }
+    );
+}
+
+
+/*
+============================================================
+CHARGER LES DONNÉES
+============================================================
+*/
+
+async function loadEvents() {
 
     try {
 
@@ -329,7 +582,6 @@ async function loadEvents() {
             throw new Error(
                 "Impossible de charger events.json"
             );
-
         }
 
 
@@ -337,174 +589,113 @@ async function loadEvents() {
             await res.json();
 
 
-        events =
+        allEvents =
             json.events || [];
+
+
+        /*
+        --------------------------------------------------------
+        CHARGER LES OVERRIDES
+        --------------------------------------------------------
+        */
+
+        try {
+
+            const overrideRes =
+                await fetch(
+                    OVERRIDES_URL +
+                    "?t=" +
+                    Date.now()
+                );
+
+
+            if (overrideRes.ok) {
+
+                overrides =
+                    await overrideRes.json();
+
+            }
+            else {
+
+                overrides = {};
+
+            }
+
+        }
+        catch (error) {
+
+            overrides = {};
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        AFFICHAGE
+        --------------------------------------------------------
+        */
+
+        renderEvents();
 
     }
     catch (error) {
 
         console.error(
-            "Erreur events.json :",
+            "Erreur de chargement :",
             error
         );
 
-        return;
-
     }
-
-
-    /*
-    ============================================================
-    STATUS OVERRIDES
-    ============================================================
-    */
-
-    try {
-
-        const res =
-            await fetch(
-                OVERRIDES_URL +
-                "?t=" +
-                Date.now()
-            );
-
-
-        if (res.ok) {
-
-            overrides =
-                await res.json();
-
-        }
-
-    }
-    catch (error) {
-
-        overrides = {};
-
-    }
-
-
-    /*
-    ============================================================
-    PROCHAIN JOUR
-    ============================================================
-    */
-
-    const nextDay =
-        findNextEventDay(
-            events
-        );
-
-
-    /*
-    ============================================================
-    AUCUN JOUR À VENIR
-    ============================================================
-    */
-
-    if (!nextDay) {
-
-        grid.innerHTML = "";
-
-        document.body.classList.add(
-            "empty"
-        );
-
-        document.getElementById(
-            "pageDate"
-        ).textContent = "";
-
-        return;
-
-    }
-
-
-    /*
-    ============================================================
-    ÉVÉNEMENTS DU PROCHAIN JOUR
-    ============================================================
-    */
-
-    const nextDayEvents =
-        events.filter(
-            event =>
-                dateOnly(
-                    new Date(event.start)
-                ).getTime()
-                ===
-                nextDay.getTime()
-        );
-
-
-    /*
-    ============================================================
-    DATE AFFICHÉE
-    ============================================================
-    */
-
-    document.getElementById(
-        "pageDate"
-    ).textContent =
-
-        nextDay.toLocaleDateString(
-            "fr-FR",
-            {
-                weekday: "long",
-                day: "2-digit",
-                month: "long",
-                year: "numeric",
-                timeZone: "Europe/Paris"
-            }
-        );
-
-
-    /*
-    ============================================================
-    AFFICHAGE
-    ============================================================
-    */
-
-    if (!nextDayEvents.length) {
-
-        grid.innerHTML = "";
-
-        document.body.classList.add(
-            "empty"
-        );
-
-        return;
-
-    }
-
-
-    document.body.classList.remove(
-        "empty"
-    );
-
-
-    grid.innerHTML = "";
-
-
-    nextDayEvents.forEach(
-        event => {
-
-            grid.appendChild(
-                renderCard(
-                    event,
-                    overrides
-                )
-            );
-
-        }
-    );
-
 }
 
+
+/*
+============================================================
+VÉRIFICATION DES ÉVÉNEMENTS
+============================================================
+
+Cette fonction permet notamment de détecter :
+
+- un événement terminé
+- un changement de jour
+- un prochain jour qui devient disponible
+============================================================
+*/
+
+function checkEvents() {
+
+    renderEvents();
+}
+
+
+/*
+============================================================
+CHARGEMENT INITIAL
+============================================================
+*/
 
 loadEvents();
 
 
+/*
+============================================================
+RECHARGEMENT COMPLET DES DONNÉES
+============================================================
+*/
+
 setInterval(
     loadEvents,
     REFRESH_MS
+);
+
+
+/*
+============================================================
+VÉRIFICATION TOUTES LES 10 SECONDES
+============================================================
+*/
+
+setInterval(
+    checkEvents,
+    CHECK_EVENTS_MS
 );
