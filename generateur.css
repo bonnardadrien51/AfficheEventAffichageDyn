@@ -1,348 +1,693 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+* {
 
-body{
+    margin: 0;
 
-    background:#0a1330;
-    color:white;
-    font-family:"Baloo 2","Segoe UI",Arial,sans-serif;
-    padding:24px;
+    padding: 0;
+
+    box-sizing: border-box;
 
 }
 
-h1{
-    font-size:28px;
-    margin-bottom:8px;
-}
 
-#hint{
-    color:#a9b0cc;
-    max-width:800px;
-    line-height:1.4;
-    margin-bottom:16px;
-}
+body {
 
-#tokenBar{
-    background:#141c40;
-    border-radius:12px;
-    padding:12px 18px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:24px;
-    max-width:800px;
-}
+    background: #0a1330;
 
-#tokenStatus{
-    font-weight:700;
-    margin-right:auto;
-    font-size:14px;
-}
+    color: white;
 
-#tokenInput{
-    flex:1;
-    min-width:220px;
-    padding:8px 12px;
-    border-radius:8px;
-    border:none;
-    font-size:14px;
-}
+    font-family:
+        "Baloo 2",
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-#tokenBar button{
-    padding:8px 14px;
-    border:none;
-    border-radius:8px;
-    font-weight:700;
-    cursor:pointer;
-    background:#2e5cf0;
-    color:white;
-    font-size:14px;
-}
-
-#tokenClear{
-    background:#3a4066;
-}
-
-#layout{
-
-    display:flex;
-    gap:24px;
-    flex-wrap:wrap;
-    align-items:flex-start;
+    padding: 24px;
 
 }
 
-#formPanel{
 
-    background:#141c40;
-    border-radius:14px;
-    padding:20px 24px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    flex:1;
-    min-width:320px;
-    max-width:480px;
+h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
 
 }
 
-label{
 
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    font-size:15px;
-    font-weight:700;
+#hint {
+
+    color: #a9b0cc;
+
+    max-width: 800px;
+
+    line-height: 1.4;
+
+    margin-bottom: 16px;
 
 }
+
+
+/* =========================================================
+   TOKEN GITHUB
+========================================================= */
+
+#tokenBar {
+
+    background: #141c40;
+
+    border-radius: 12px;
+
+    padding: 12px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 24px;
+
+    max-width: 800px;
+
+}
+
+
+#tokenStatus {
+
+    font-weight: 700;
+
+    margin-right: auto;
+
+    font-size: 14px;
+
+}
+
+
+#tokenInput {
+
+    flex: 1;
+
+    min-width: 220px;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    font-size: 14px;
+
+}
+
+
+#tokenBar button {
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    background: #2e5cf0;
+
+    color: white;
+
+    font-size: 14px;
+
+}
+
+
+#tokenClear {
+
+    background: #3a4066;
+
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+#layout {
+
+    display: flex;
+
+    gap: 24px;
+
+    flex-wrap: wrap;
+
+    align-items: flex-start;
+
+}
+
+
+#formPanel {
+
+    background: #141c40;
+
+    border-radius: 14px;
+
+    padding: 20px 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    flex: 1;
+
+    min-width: 320px;
+
+    max-width: 480px;
+
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+label {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
 
 input[type="text"],
 input[type="url"],
-select{
+select {
 
-    padding:10px 12px;
-    border-radius:8px;
-    border:none;
-    font-size:15px;
-    font-family:inherit;
+    padding: 10px 12px;
 
-}
+    border-radius: 8px;
 
-.colorRow{
+    border: none;
 
-    display:flex;
-    gap:8px;
+    font-size: 15px;
+
+    font-family: inherit;
 
 }
 
-.colorRow input[type="color"]{
 
-    width:44px;
-    height:44px;
-    border:none;
-    border-radius:8px;
-    padding:0;
-    cursor:pointer;
+/* =========================================================
+   CHAMPS IMAGE / LOGO
+========================================================= */
 
-}
+.mediaInputRow {
 
-.fieldHint{
+    display: flex;
 
-    font-size:12px;
-    font-weight:500;
-    color:#a9b0cc;
+    gap: 8px;
+
+    width: 100%;
 
 }
 
-.colorRow input[type="text"]{
 
-    flex:1;
+.mediaInputRow input {
 
-}
+    flex: 1;
 
-#resetBtn{
-
-    margin-top:8px;
-    padding:10px 16px;
-    border-radius:8px;
-    border:none;
-    background:#3a4066;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-    align-self:flex-start;
+    min-width: 0;
 
 }
 
-#outputPanel{
 
-    background:#141c40;
-    border-radius:14px;
-    padding:20px 24px;
-    flex:1;
-    min-width:320px;
-    max-width:640px;
+.mediaChooseBtn {
 
-}
+    flex: 0 0 auto;
 
-#outputHeader{
+    padding: 10px 14px;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:12px;
-    font-weight:700;
+    border: none;
 
-}
+    border-radius: 8px;
 
-#copyBtn{
+    background: #2e5cf0;
 
-    padding:8px 16px;
-    border-radius:8px;
-    border:none;
-    background:#2e5cf0;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
 
 }
 
-#copyBtn.copied{
 
-    background:#2fae5f;
+.mediaChooseBtn:hover {
 
-}
-
-#output{
-
-    background:#0a1330;
-    border-radius:10px;
-    padding:16px;
-    font-family:"Consolas","Monaco",monospace;
-    font-size:14px;
-    line-height:1.5;
-    white-space:pre-wrap;
-    word-break:break-word;
-    color:#d7defc;
+    background: #416cf5;
 
 }
 
-/**************************************************
-    TEMPLATES
-**************************************************/
 
-#templatePanel{
+.mediaChooseBtn:active {
 
-    margin-top:20px;
-    border-top:1px solid rgba(255,255,255,.1);
-    padding-top:16px;
+    transform: translateY(1px);
 
 }
 
-#templateSaveRow{
 
-    display:flex;
-    gap:10px;
-    margin-bottom:14px;
+/* =========================================================
+   COULEUR
+========================================================= */
 
-}
+.colorRow {
 
-#templateSaveRow input{
+    display: flex;
 
-    flex:1;
-    min-width:0;
-    padding:8px 12px;
-    border-radius:8px;
-    border:none;
-    font-size:14px;
-    font-family:inherit;
+    gap: 8px;
 
 }
 
-#templateSaveBtn{
 
-    padding:8px 14px;
-    border:none;
-    border-radius:8px;
-    background:#2fae5f;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-    white-space:nowrap;
+.colorRow input[type="color"] {
 
-}
+    width: 44px;
 
-#templateListHeader{
+    height: 44px;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-weight:700;
-    font-size:14px;
-    margin-bottom:10px;
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 0;
+
+    cursor: pointer;
 
 }
 
-#templateRefreshBtn{
 
-    padding:4px 10px;
-    border:none;
-    border-radius:6px;
-    background:#3a4066;
-    color:white;
-    cursor:pointer;
-    font-size:16px;
+.fieldHint {
 
-}
+    font-size: 12px;
 
-#templateList{
+    font-weight: 500;
 
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+    color: #a9b0cc;
 
 }
 
-.templateItem{
 
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:#0a1330;
-    border-radius:8px;
-    padding:8px 12px;
+.colorRow input[type="text"] {
+
+    flex: 1;
 
 }
 
-.templateItem .templateItemName{
 
-    flex:1;
-    font-size:14px;
+/* =========================================================
+   RESET
+========================================================= */
 
-}
+#resetBtn {
 
-.templateItem button{
+    margin-top: 8px;
 
-    padding:4px 10px;
-    border:none;
-    border-radius:6px;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
+    padding: 10px 16px;
 
-}
+    border-radius: 8px;
 
-.templateLoadBtn{
+    border: none;
 
-    background:#2e5cf0;
-    color:white;
+    background: #3a4066;
 
-}
+    color: white;
 
-.templateDeleteBtn{
+    font-weight: 700;
 
-    background:#c0392b;
-    color:white;
+    cursor: pointer;
+
+    align-self: flex-start;
 
 }
 
-.templateHint{
 
-    color:#a9b0cc;
-    font-size:13px;
+#resetBtn:hover {
 
-}
-
-.templateMsg{
-
-    font-size:13px;
-    padding:6px 0;
+    background: #4a527d;
 
 }
 
-.templateMsg.ok{ color:#2fae5f; }
-.templateMsg.err{ color:#ff8080; }
+
+/* =========================================================
+   OUTPUT
+========================================================= */
+
+#outputPanel {
+
+    background: #141c40;
+
+    border-radius: 14px;
+
+    padding: 20px 24px;
+
+    flex: 1;
+
+    min-width: 320px;
+
+    max-width: 640px;
+
+}
+
+
+#outputHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+    font-weight: 700;
+
+}
+
+
+#copyBtn {
+
+    padding: 8px 16px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    background: #2e5cf0;
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+#copyBtn.copied {
+
+    background: #2fae5f;
+
+}
+
+
+#output {
+
+    background: #0a1330;
+
+    border-radius: 10px;
+
+    padding: 16px;
+
+    font-family:
+        "Consolas",
+        "Monaco",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    color: #d7defc;
+
+}
+
+
+/* =========================================================
+   TEMPLATES
+========================================================= */
+
+#templatePanel {
+
+    margin-top: 20px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.1);
+
+    padding-top: 16px;
+
+}
+
+
+#templateSaveRow {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+
+}
+
+
+#templateSaveRow input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    font-size: 14px;
+
+    font-family: inherit;
+
+}
+
+
+#templateSaveBtn {
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2fae5f;
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+#templateListHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+#templateRefreshBtn {
+
+    padding: 4px 10px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #3a4066;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+
+#templateList {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.templateItem {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: #0a1330;
+
+    border-radius: 8px;
+
+    padding: 8px 12px;
+
+}
+
+
+.templateItem .templateItemName {
+
+    flex: 1;
+
+    font-size: 14px;
+
+}
+
+
+.templateItem button {
+
+    padding: 4px 10px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.templateLoadBtn {
+
+    background: #2e5cf0;
+
+    color: white;
+
+}
+
+
+.templateDeleteBtn {
+
+    background: #c0392b;
+
+    color: white;
+
+}
+
+
+.templateHint {
+
+    color: #a9b0cc;
+
+    font-size: 13px;
+
+}
+
+
+.templateMsg {
+
+    font-size: 13px;
+
+    padding: 6px 0;
+
+}
+
+
+.templateMsg.ok {
+
+    color: #2fae5f;
+
+}
+
+
+.templateMsg.err {
+
+    color: #ff8080;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 16px;
+
+    }
+
+
+    .mediaInputRow {
+
+        flex-direction: column;
+
+    }
+
+
+    .mediaChooseBtn {
+
+        width: 100%;
+
+    }
+
+
+    #templateSaveRow {
+
+        flex-direction: column;
+
+    }
+
+
+    #templateSaveBtn {
+
+        width: 100%;
+
+    }
+
+}
