@@ -4,139 +4,415 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 
-    <title>Générateur JSON - Description événement</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="generateur.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <title>
+        Générateur JSON - Description événement
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="generateur.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="images.css"
+    >
 
 </head>
 
+
 <body>
 
-<h1>Générateur de description JSON</h1>
+<h1>
+    Générateur de description JSON
+</h1>
+
 
 <p id="hint">
-    Remplissez ce qui s'applique à l'événement (tout est facultatif),
-    puis copiez le résultat dans le champ Description de l'événement
+
+    Remplissez ce qui s'applique à l'événement
+    (tout est facultatif), puis copiez le résultat
+    dans le champ Description de l'événement
     sur Google Calendar.
+
 </p>
 
+
 <div id="tokenBar">
-    <span id="tokenStatus">Aucun token enregistré</span>
-    <input id="tokenInput" type="password" placeholder="Token GitHub (Contents: Read/Write) — pour les templates">
-    <button id="tokenSave">Enregistrer</button>
-    <button id="tokenClear">Effacer</button>
+
+    <span id="tokenStatus">
+        Aucun token enregistré
+    </span>
+
+
+    <input
+        id="tokenInput"
+        type="password"
+        placeholder="Token GitHub (Contents: Read/Write) — pour les templates"
+    >
+
+
+    <button
+        id="tokenSave"
+        type="button"
+    >
+        Enregistrer
+    </button>
+
+
+    <button
+        id="tokenClear"
+        type="button"
+    >
+        Effacer
+    </button>
+
 </div>
+
 
 <div id="layout">
 
+
+    <!-- =====================================================
+         FORMULAIRE
+    ====================================================== -->
+
     <div id="formPanel">
 
+
         <label>
+
             Titre de la campagne
-            <input id="f_titre" type="text" placeholder="Ex: Tout Besançon vole 2026">
+
+            <input
+                id="f_titre"
+                type="text"
+                placeholder="Ex: Tout Besançon vole 2026"
+            >
+
         </label>
 
+
+        <!-- PHOTO -->
+
         <label>
+
             Photo de l'événement (URL)
-            <input id="f_image" type="url" placeholder="https://...">
-        </label>
 
-        <label>
-            Logo de la campagne (URL)
-            <input id="f_logo" type="url" placeholder="https://...">
-        </label>
+            <div class="mediaInputRow">
 
-        <label>
-            Couleur de fond du logo
-            <div class="colorRow">
-                <input id="f_logo_fond_picker" type="color" value="#ffffff">
-                <input id="f_logo_fond" type="text" placeholder="Vide = transparent">
+                <input
+                    id="f_image"
+                    type="url"
+                    placeholder="https://..."
+                >
+
+                <button
+                    id="chooseImageBtn"
+                    type="button"
+                    class="mediaChooseBtn"
+                >
+                    Choisir
+                </button>
+
             </div>
+
         </label>
 
+
+        <!-- LOGO -->
+
         <label>
+
+            Logo de la campagne (URL)
+
+            <div class="mediaInputRow">
+
+                <input
+                    id="f_logo"
+                    type="url"
+                    placeholder="https://..."
+                >
+
+                <button
+                    id="chooseLogoBtn"
+                    type="button"
+                    class="mediaChooseBtn"
+                >
+                    Choisir
+                </button>
+
+            </div>
+
+        </label>
+
+
+        <label>
+
+            Couleur de fond du logo
+
+            <div class="colorRow">
+
+                <input
+                    id="f_logo_fond_picker"
+                    type="color"
+                    value="#ffffff"
+                >
+
+                <input
+                    id="f_logo_fond"
+                    type="text"
+                    placeholder="Vide = transparent"
+                >
+
+            </div>
+
+        </label>
+
+
+        <label>
+
             Photo de fond plein écran (URL)
-            <input id="f_fond" type="url" placeholder="Vide = fond bleu nuit actuel">
+
+            <input
+                id="f_fond"
+                type="url"
+                placeholder="Vide = fond bleu nuit actuel"
+            >
+
         </label>
 
+
         <label>
+
             Tarif
-            <input id="f_tarif" type="text" placeholder="Ex: Gratuit / Au chapeau / 15€ par personne">
+
+            <input
+                id="f_tarif"
+                type="text"
+                placeholder="Ex: Gratuit / Au chapeau / 15€ par personne"
+            >
+
         </label>
 
+
         <label>
+
             Inscription
-            <input id="f_inscription" type="text" placeholder="Ex: Sur inscription / Réservation conseillée">
+
+            <input
+                id="f_inscription"
+                type="text"
+                placeholder="Ex: Sur inscription / Réservation conseillée"
+            >
+
         </label>
 
+
         <label>
+
             Statut
+
             <select id="f_statut">
-                <option value="">Aucun</option>
-                <option value="Annulé">Annulé</option>
-                <option value="Complet">Complet</option>
-                <option value="Reporté">Reporté</option>
+
+                <option value="">
+                    Aucun
+                </option>
+
+                <option value="Annulé">
+                    Annulé
+                </option>
+
+                <option value="Complet">
+                    Complet
+                </option>
+
+                <option value="Reporté">
+                    Reporté
+                </option>
+
             </select>
+
         </label>
 
+
         <label>
+
             Lieu personnalisé
-            <input id="f_lieu" type="text" placeholder="Ex: Salle des fêtes de Palente">
-            <span class="fieldHint">Utilisé selon le mode d'affichage du lieu ci-dessous</span>
+
+            <input
+                id="f_lieu"
+                type="text"
+                placeholder="Ex: Salle des fêtes de Palente"
+            >
+
+            <span class="fieldHint">
+                Utilisé selon le mode d'affichage du lieu ci-dessous
+            </span>
+
         </label>
+
 
         <label>
+
             Affichage du lieu
+
             <select id="f_affichage_lieu">
-                <option value="3">Mode 3 — Lieu événement, sinon lieu JSON (défaut)</option>
-                <option value="0">Mode 0 — Ne rien afficher</option>
-                <option value="1">Mode 1 — Lieu de l'événement Google Calendar</option>
-                <option value="2">Mode 2 — Lieu du JSON uniquement</option>
-                <option value="4">Mode 4 — Lieu JSON, sinon lieu événement</option>
+
+                <option value="3">
+                    Mode 3 — Lieu événement, sinon lieu JSON (défaut)
+                </option>
+
+                <option value="0">
+                    Mode 0 — Ne rien afficher
+                </option>
+
+                <option value="1">
+                    Mode 1 — Lieu de l'événement Google Calendar
+                </option>
+
+                <option value="2">
+                    Mode 2 — Lieu du JSON uniquement
+                </option>
+
+                <option value="4">
+                    Mode 4 — Lieu JSON, sinon lieu événement
+                </option>
+
             </select>
+
         </label>
 
-        <button id="resetBtn" type="button">Réinitialiser</button>
+
+        <button
+            id="resetBtn"
+            type="button"
+        >
+            Réinitialiser
+        </button>
+
 
     </div>
 
+
+    <!-- =====================================================
+         SORTIE JSON
+    ====================================================== -->
+
     <div id="outputPanel">
 
+
         <div id="outputHeader">
-            <span>JSON à coller dans la description</span>
-            <button id="copyBtn" type="button">Copier</button>
+
+            <span>
+                JSON à coller dans la description
+            </span>
+
+
+            <button
+                id="copyBtn"
+                type="button"
+            >
+                Copier
+            </button>
+
         </div>
+
 
         <pre id="output"></pre>
 
+
+        <!-- =================================================
+             TEMPLATES
+        ================================================== -->
+
         <div id="templatePanel">
 
+
             <div id="templateSaveRow">
-                <input id="templateName" type="text" placeholder="Nom du template (ex: TBV-2026)">
-                <button id="templateSaveBtn" type="button">💾 Sauvegarder</button>
+
+                <input
+                    id="templateName"
+                    type="text"
+                    placeholder="Nom du template (ex: TBV-2026)"
+                >
+
+
+                <button
+                    id="templateSaveBtn"
+                    type="button"
+                >
+                    Sauvegarder
+                </button>
+
             </div>
+
 
             <div id="templateListHeader">
-                <span>Templates enregistrés</span>
-                <button id="templateRefreshBtn" type="button">↻</button>
+
+                <span>
+                    Templates enregistrés
+                </span>
+
+
+                <button
+                    id="templateRefreshBtn"
+                    type="button"
+                >
+                    ↻
+                </button>
+
             </div>
+
 
             <div id="templateList">
-                <span class="templateHint">Entrez votre token GitHub pour accéder aux templates.</span>
+
+                <span class="templateHint">
+                    Entrez votre token GitHub pour accéder aux templates.
+                </span>
+
             </div>
 
+
         </div>
+
 
     </div>
 
 </div>
 
+
+<!-- IMPORTANT :
+     images.js doit être chargé AVANT generateur.js
+     car generateur.js utilise window.ImageLibrary.
+-->
+
+<script src="images.js"></script>
+
 <script src="generateur.js"></script>
+
 
 </body>
 
