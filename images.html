@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <title>Bibliothèque d'images</title>
+
+    <link
+        rel="stylesheet"
+        href="images.css"
+    >
+
+</head>
+
+<body>
+
+<header class="pageHeader">
+
+    <div>
+        <h1>Bibliothèque d'images</h1>
+
+        <p>
+            Toutes les images disponibles dans le dossier
+            <strong>img/</strong>
+        </p>
+    </div>
+
+</header>
+
+
+<main id="imageLibrary">
+
+    <div class="libraryLoading">
+        Chargement des images…
+    </div>
+
+</main>
+
+
+<!-- Fenêtre d'affichage d'une image -->
+<div
+    id="imageModal"
+    class="imageModal"
+    aria-hidden="true"
+>
+
+    <div class="modalOverlay"></div>
+
+    <div
+        class="modalContent"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <button
+            id="modalClose"
+            class="modalClose"
+            type="button"
+            aria-label="Fermer"
+        >
+            ×
+        </button>
+
+
+        <img
+            id="modalImage"
+            src=""
+            alt=""
+        >
+
+
+        <div class="modalInfo">
+
+            <div
+                id="modalFileName"
+                class="modalFileName"
+            ></div>
+
+            <div
+                id="modalPath"
+                class="modalPath"
+            ></div>
+
+            <div class="modalActions">
+
+                <button
+                    id="copyImageLink"
+                    class="primaryButton"
+                    type="button"
+                >
+                    Copier le lien
+                </button>
+
+                <a
+                    id="openImageLink"
+                    class="secondaryButton"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Ouvrir l'image
+                </a>
+
+            </div>
+
+            <div
+                id="copyMessage"
+                class="copyMessage"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="images.js"></script>
+
+</body>
+
+</html>
