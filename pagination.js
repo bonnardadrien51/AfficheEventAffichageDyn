@@ -6,13 +6,13 @@
     ============================================================
     */
 
-    // Nombre maximum d'événements visibles
+    // Nombre maximum d'événements visibles par page
     const EVENTS_PER_PAGE = 6;
 
-    // Changement de page toutes les 10 secondes
+    // Temps entre deux changements automatiques
     const PAGE_DURATION = 10000;
 
-    // Durée du fondu
+    // Durée de l'animation
     const FADE_DURATION = 500;
 
 
@@ -23,12 +23,13 @@
     */
 
     let currentPage = 0;
-
     let totalPages = 1;
 
     let pageTimer = null;
-
     let mutationTimer = null;
+
+    let html2canvasLoaded = false;
+    let html2canvasLoading = null;
 
 
     /*
@@ -38,14 +39,10 @@
     */
 
     const grid =
-        document.getElementById(
-            "eventGrid"
-        );
+        document.getElementById("eventGrid");
 
     const indicator =
-        document.getElementById(
-            "pageIndicator"
-        );
+        document.getElementById("pageIndicator");
 
 
     if (!grid) {
@@ -68,9 +65,7 @@
     function getEvents() {
 
         return Array.from(
-            grid.querySelectorAll(
-                ".eventCard"
-            )
+            grid.querySelectorAll(".eventCard")
         );
 
     }
@@ -78,33 +73,24 @@
 
     /*
     ============================================================
-    CALCUL DES PAGES
+    CALCUL DU NOMBRE DE PAGES
     ============================================================
     */
 
     function calculatePages() {
 
-        const events =
-            getEvents();
+        const events = getEvents();
 
-        totalPages =
-            Math.max(
-                1,
-                Math.ceil(
-                    events.length /
-                    EVENTS_PER_PAGE
-                )
-            );
+        totalPages = Math.max(
+            1,
+            Math.ceil(
+                events.length /
+                EVENTS_PER_PAGE
+            )
+        );
 
 
-        /*
-        Si le nombre d'événements diminue,
-        on revient sur une page existante.
-        */
-
-        if (
-            currentPage >= totalPages
-        ) {
+        if (currentPage >= totalPages) {
 
             currentPage = 0;
 
@@ -122,15 +108,13 @@
     function updateIndicator() {
 
         if (!indicator) {
-
             return;
-
         }
 
 
         /*
-        Pas d'indicateur s'il n'y a
-        qu'une seule page.
+        S'il n'y a qu'une seule page,
+        on ne montre pas le compteur.
         */
 
         if (totalPages <= 1) {
@@ -142,57 +126,62 @@
         }
 
 
-        /*
-        Affichage :
-
-        ‹ 1 / 2 ›
-
-        */
-
         indicator.innerHTML = `
-
-            <button
-                id="previousPageButton"
-                class="pageArrow"
-                aria-label="Page précédente"
-                type="button"
-            >‹</button>
 
             <span class="pageNumber">
                 ${currentPage + 1} / ${totalPages}
             </span>
 
-            <button
-                id="nextPageButton"
-                class="pageArrow"
-                aria-label="Page suivante"
-                type="button"
-            >›</button>
-
         `;
 
+    }
+
+
+    /*
+    ============================================================
+    CRÉATION DES CONTRÔLES
+    ============================================================
+    */
+
+    function createControls() {
 
         /*
-        Bouton page précédente
+        --------------------------------------------------------
+        FLÈCHE GAUCHE
+        --------------------------------------------------------
         */
 
-        const previousButton =
+        let previousButton =
             document.getElementById(
                 "previousPageButton"
             );
 
 
-        /*
-        Bouton page suivante
-        */
+        if (!previousButton) {
 
-        const nextButton =
-            document.getElementById(
-                "nextPageButton"
+            previousButton =
+                document.createElement("button");
+
+            previousButton.id =
+                "previousPageButton";
+
+            previousButton.className =
+                "pageArrow pageArrowLeft";
+
+            previousButton.type =
+                "button";
+
+            previousButton.setAttribute(
+                "aria-label",
+                "Page précédente"
             );
 
+            previousButton.innerHTML = "‹";
 
-        if (previousButton) {
+            document.body.appendChild(
+                previousButton
+            );
+
 
             previousButton.addEventListener(
                 "click",
@@ -202,11 +191,96 @@
         }
 
 
-        if (nextButton) {
+        /*
+        --------------------------------------------------------
+        FLÈCHE DROITE
+        --------------------------------------------------------
+        */
+
+        let nextButton =
+            document.getElementById(
+                "nextPageButton"
+            );
+
+
+        if (!nextButton) {
+
+            nextButton =
+                document.createElement("button");
+
+            nextButton.id =
+                "nextPageButton";
+
+            nextButton.className =
+                "pageArrow pageArrowRight";
+
+            nextButton.type =
+                "button";
+
+            nextButton.setAttribute(
+                "aria-label",
+                "Page suivante"
+            );
+
+            nextButton.innerHTML = "›";
+
+            document.body.appendChild(
+                nextButton
+            );
+
 
             nextButton.addEventListener(
                 "click",
                 nextPage
+            );
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        BOUTON CAPTURE
+        --------------------------------------------------------
+        */
+
+        let screenshotButton =
+            document.getElementById(
+                "screenshotButton"
+            );
+
+
+        if (!screenshotButton) {
+
+            screenshotButton =
+                document.createElement("button");
+
+            screenshotButton.id =
+                "screenshotButton";
+
+            screenshotButton.className =
+                "screenshotButton";
+
+            screenshotButton.type =
+                "button";
+
+            screenshotButton.setAttribute(
+                "aria-label",
+                "Faire une capture d'écran"
+            );
+
+            screenshotButton.title =
+                "Capture d'écran";
+
+            screenshotButton.innerHTML = "📷";
+
+            document.body.appendChild(
+                screenshotButton
+            );
+
+
+            screenshotButton.addEventListener(
+                "click",
+                captureScreen
             );
 
         }
@@ -216,7 +290,7 @@
 
     /*
     ============================================================
-    AFFICHER UNE PAGE
+    AFFICHAGE D'UNE PAGE
     ============================================================
     */
 
@@ -225,23 +299,15 @@
         animate = false
     ) {
 
-        const events =
-            getEvents();
-
+        const events = getEvents();
 
         calculatePages();
 
 
-        /*
-        Aucun événement.
-        */
-
         if (!events.length) {
 
             if (indicator) {
-
                 indicator.innerHTML = "";
-
             }
 
             return;
@@ -250,7 +316,7 @@
 
 
         /*
-        Sécurité.
+        Sécurité
         */
 
         if (
@@ -263,12 +329,11 @@
         }
 
 
-        currentPage =
-            page;
+        currentPage = page;
 
 
         /*
-        Tous les événements sont cachés.
+        Cacher tous les événements
         */
 
         events.forEach(
@@ -282,13 +347,13 @@
 
 
         /*
-        Événements à afficher.
+        Déterminer les événements
+        de la page actuelle
         */
 
         const start =
             currentPage *
             EVENTS_PER_PAGE;
-
 
         const end =
             start +
@@ -313,14 +378,14 @@
 
 
         /*
-        Mise à jour de l'indicateur.
+        Mise à jour du compteur
         */
 
         updateIndicator();
 
 
         /*
-        Animation.
+        Animation
         */
 
         if (animate) {
@@ -365,27 +430,17 @@
         calculatePages();
 
 
-        /*
-        Une seule page :
-        aucun changement.
-        */
-
-        if (
-            totalPages <= 1
-        ) {
-
+        if (totalPages <= 1) {
             return;
-
         }
 
 
         const previous =
             (
-                currentPage - 1 +
+                currentPage -
+                1 +
                 totalPages
-            )
-            %
-            totalPages;
+            ) % totalPages;
 
 
         showPage(
@@ -393,11 +448,6 @@
             true
         );
 
-
-        /*
-        Le clic manuel remet le
-        compteur de 10 secondes à zéro.
-        */
 
         restartTimer();
 
@@ -415,26 +465,16 @@
         calculatePages();
 
 
-        /*
-        Une seule page :
-        aucun changement.
-        */
-
-        if (
-            totalPages <= 1
-        ) {
-
+        if (totalPages <= 1) {
             return;
-
         }
 
 
         const next =
             (
-                currentPage + 1
-            )
-            %
-            totalPages;
+                currentPage +
+                1
+            ) % totalPages;
 
 
         showPage(
@@ -443,14 +483,6 @@
         );
 
 
-        /*
-        Le clic manuel remet le
-        compteur de 10 secondes à zéro.
-
-        Cela est également appelé par
-        le changement automatique.
-        */
-
         restartTimer();
 
     }
@@ -458,7 +490,7 @@
 
     /*
     ============================================================
-    TIMER
+    TIMER AUTOMATIQUE
     ============================================================
     */
 
@@ -473,9 +505,39 @@
         }
 
 
+        /*
+        Une seule page :
+        inutile de lancer le timer.
+        */
+
+        if (totalPages <= 1) {
+
+            pageTimer = null;
+
+            return;
+
+        }
+
+
         pageTimer =
             setInterval(
-                nextPage,
+                () => {
+
+                    calculatePages();
+
+                    const next =
+                        (
+                            currentPage +
+                            1
+                        ) % totalPages;
+
+
+                    showPage(
+                        next,
+                        true
+                    );
+
+                },
                 PAGE_DURATION
             );
 
@@ -484,14 +546,405 @@
 
     /*
     ============================================================
-    OBSERVATION DU DOM
+    CHARGEMENT DE HTML2CANVAS
     ============================================================
+    */
 
-    jour.js et prochain-jour.js
-    reconstruisent #eventGrid toutes
-    les 60 secondes.
+    function loadHtml2Canvas() {
 
-    On détecte cette modification.
+        /*
+        Déjà chargé
+        */
+
+        if (
+            html2canvasLoaded &&
+            typeof window.html2canvas ===
+                "function"
+        ) {
+
+            return Promise.resolve();
+
+        }
+
+
+        /*
+        Chargement déjà en cours
+        */
+
+        if (html2canvasLoading) {
+
+            return html2canvasLoading;
+
+        }
+
+
+        html2canvasLoading =
+            new Promise(
+                (resolve, reject) => {
+
+                    const script =
+                        document.createElement(
+                            "script"
+                        );
+
+
+                    script.src =
+                        "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js";
+
+
+                    script.onload =
+                        () => {
+
+                            html2canvasLoaded =
+                                true;
+
+                            resolve();
+
+                        };
+
+
+                    script.onerror =
+                        () => {
+
+                            html2canvasLoading =
+                                null;
+
+                            reject(
+                                new Error(
+                                    "Impossible de charger html2canvas."
+                                )
+                            );
+
+                        };
+
+
+                    document.head.appendChild(
+                        script
+                    );
+
+                }
+            );
+
+
+        return html2canvasLoading;
+
+    }
+
+
+    /*
+    ============================================================
+    CAPTURE D'ÉCRAN
+    ============================================================
+    */
+
+    async function captureScreen() {
+
+        const button =
+            document.getElementById(
+                "screenshotButton"
+            );
+
+        const previousButton =
+            document.getElementById(
+                "previousPageButton"
+            );
+
+        const nextButton =
+            document.getElementById(
+                "nextPageButton"
+            );
+
+
+        try {
+
+            /*
+            ----------------------------------------------------
+            Désactiver le bouton pendant la capture
+            ----------------------------------------------------
+            */
+
+            if (button) {
+
+                button.disabled = true;
+
+                button.innerHTML = "⏳";
+
+            }
+
+
+            /*
+            ----------------------------------------------------
+            Charger html2canvas
+            ----------------------------------------------------
+            */
+
+            await loadHtml2Canvas();
+
+
+            /*
+            ----------------------------------------------------
+            Masquer temporairement les contrôles
+            ----------------------------------------------------
+            */
+
+            if (button) {
+
+                button.classList.add(
+                    "captureHidden"
+                );
+
+            }
+
+            if (previousButton) {
+
+                previousButton.classList.add(
+                    "captureHidden"
+                );
+
+            }
+
+            if (nextButton) {
+
+                nextButton.classList.add(
+                    "captureHidden"
+                );
+
+            }
+
+            if (indicator) {
+
+                indicator.classList.add(
+                    "captureHidden"
+                );
+
+            }
+
+
+            /*
+            ----------------------------------------------------
+            Petite pause pour laisser le navigateur
+            appliquer le masquage
+            ----------------------------------------------------
+            */
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        100
+                    )
+            );
+
+
+            /*
+            ----------------------------------------------------
+            Capture de la page
+            ----------------------------------------------------
+            */
+
+            const canvas =
+                await window.html2canvas(
+                    document.body,
+                    {
+
+                        backgroundColor:
+                            null,
+
+                        scale:
+                            window.devicePixelRatio ||
+                            1,
+
+                        useCORS:
+                            true,
+
+                        allowTaint:
+                            false,
+
+                        logging:
+                            false,
+
+                        width:
+                            document.documentElement
+                                .clientWidth,
+
+                        height:
+                            document.documentElement
+                                .clientHeight,
+
+                        windowWidth:
+                            document.documentElement
+                                .clientWidth,
+
+                        windowHeight:
+                            document.documentElement
+                                .clientHeight
+
+                    }
+                );
+
+
+            /*
+            ----------------------------------------------------
+            Conversion PNG
+            ----------------------------------------------------
+            */
+
+            const image =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            /*
+            ----------------------------------------------------
+            Téléchargement
+            ----------------------------------------------------
+            */
+
+            const now =
+                new Date();
+
+
+            const year =
+                now.getFullYear();
+
+            const month =
+                String(
+                    now.getMonth() + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const day =
+                String(
+                    now.getDate()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const hours =
+                String(
+                    now.getHours()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const minutes =
+                String(
+                    now.getMinutes()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const seconds =
+                String(
+                    now.getSeconds()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            const filename =
+                `affichage-${year}-${month}-${day}-${hours}-${minutes}-${seconds}.png`;
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+            link.download =
+                filename;
+
+            link.href =
+                image;
+
+            link.click();
+
+
+        }
+        catch (error) {
+
+            console.error(
+                "Erreur lors de la capture :",
+                error
+            );
+
+
+            alert(
+                "Impossible de réaliser la capture d'écran."
+            );
+
+        }
+        finally {
+
+            /*
+            ----------------------------------------------------
+            Réafficher les contrôles
+            ----------------------------------------------------
+            */
+
+            if (button) {
+
+                button.classList.remove(
+                    "captureHidden"
+                );
+
+                button.disabled =
+                    false;
+
+                button.innerHTML =
+                    "📷";
+
+            }
+
+
+            if (previousButton) {
+
+                previousButton.classList.remove(
+                    "captureHidden"
+                );
+
+            }
+
+
+            if (nextButton) {
+
+                nextButton.classList.remove(
+                    "captureHidden"
+                );
+
+            }
+
+
+            if (indicator) {
+
+                indicator.classList.remove(
+                    "captureHidden"
+                );
+
+            }
+
+
+            /*
+            Le timer repart après la capture.
+            */
+
+            restartTimer();
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+    OBSERVATION DES MODIFICATIONS
     ============================================================
     */
 
@@ -508,15 +961,7 @@
                     setTimeout(
                         () => {
 
-                            /*
-                            Les données viennent d'être
-                            rechargées.
-
-                            On repart de la première page.
-                            */
-
                             currentPage = 0;
-
 
                             calculatePages();
 
@@ -526,6 +971,8 @@
                                 false
                             );
 
+
+                            createControls();
 
                             restartTimer();
 
@@ -547,7 +994,7 @@
 
     /*
     ============================================================
-    STYLE D'ANIMATION + NAVIGATION
+    CSS
     ============================================================
     */
 
@@ -560,9 +1007,9 @@
     style.textContent = `
 
         /*
-        --------------------------------------------------------
-        ANIMATION DU GRILLE
-        --------------------------------------------------------
+        ========================================================
+        ANIMATION
+        ========================================================
         */
 
         #eventGrid {
@@ -590,9 +1037,9 @@
 
 
         /*
-        --------------------------------------------------------
-        INDICATEUR DE PAGE
-        --------------------------------------------------------
+        ========================================================
+        COMPTEUR DE PAGE
+        ========================================================
         */
 
         #pageIndicator {
@@ -608,8 +1055,6 @@
 
             justify-content: center;
 
-            gap: 0.4vw;
-
             font-family:
                 "Baloo 2",
                 "Segoe UI",
@@ -622,18 +1067,14 @@
 
             color: white;
 
-            opacity: 0.75;
+            opacity: 0.65;
 
             z-index: 1000;
 
+            pointer-events: none;
+
         }
 
-
-        /*
-        --------------------------------------------------------
-        NUMÉRO DE PAGE
-        --------------------------------------------------------
-        */
 
         #pageIndicator .pageNumber {
 
@@ -647,12 +1088,25 @@
 
 
         /*
-        --------------------------------------------------------
-        FLÈCHES
-        --------------------------------------------------------
+        ========================================================
+        FLÈCHES LATÉRALES
+        ========================================================
         */
 
-        #pageIndicator .pageArrow {
+        .pageArrow {
+
+            position: fixed;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 3vw;
+
+            height: 8vh;
+
+            padding: 0;
 
             border: none;
 
@@ -666,66 +1120,164 @@
                 Arial,
                 sans-serif;
 
-            font-size: 1.8vw;
+            font-size: 4vw;
 
             font-weight: 700;
 
             line-height: 1;
 
-            padding: 0.1vw 0.3vw;
-
-            margin: 0;
-
             cursor: pointer;
 
-            opacity: 0.7;
+            opacity: 0.25;
+
+            z-index: 1001;
 
             transition:
-                transform 0.15s ease,
-                opacity 0.15s ease;
+                opacity 0.2s ease,
+                transform 0.2s ease;
 
         }
 
 
-        /*
-        --------------------------------------------------------
-        SURVOL
-        --------------------------------------------------------
-        */
+        .pageArrow:hover {
 
-        #pageIndicator .pageArrow:hover {
+            opacity: 0.9;
+
+        }
+
+
+        .pageArrow:active {
 
             opacity: 1;
 
-            transform:
-                scale(1.2);
+        }
+
+
+        .pageArrowLeft {
+
+            left: 0.5vw;
+
+        }
+
+
+        .pageArrowRight {
+
+            right: 0.5vw;
 
         }
 
 
         /*
-        --------------------------------------------------------
-        CLIC
-        --------------------------------------------------------
+        ========================================================
+        BOUTON CAPTURE
+        ========================================================
         */
 
-        #pageIndicator .pageArrow:active {
+        .screenshotButton {
+
+            position: fixed;
+
+            right: 0.8vw;
+
+            bottom: 1.2vh;
+
+            width: 2.2vw;
+
+            height: 2.2vw;
+
+            min-width: 28px;
+
+            min-height: 28px;
+
+            padding: 0;
+
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            border-radius: 5px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+
+            color: white;
+
+            font-size: 1vw;
+
+            line-height: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            opacity: 0.35;
+
+            z-index: 1002;
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                background 0.2s ease;
+
+        }
+
+
+        .screenshotButton:hover {
+
+            opacity: 0.9;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                );
 
             transform:
-                scale(0.9);
+                scale(1.08);
+
+        }
+
+
+        .screenshotButton:active {
+
+            transform:
+                scale(0.95);
+
+        }
+
+
+        .screenshotButton:disabled {
+
+            cursor:
+                wait;
 
         }
 
 
         /*
-        --------------------------------------------------------
-        FOCUS
-        --------------------------------------------------------
+        ========================================================
+        MASQUAGE POUR LA CAPTURE
+        ========================================================
         */
 
-        #pageIndicator .pageArrow:focus {
+        .captureHidden {
 
-            outline: none;
+            display: none !important;
 
         }
 
@@ -747,12 +1299,12 @@
 
         calculatePages();
 
+        createControls();
 
         showPage(
             0,
             false
         );
-
 
         restartTimer();
 
