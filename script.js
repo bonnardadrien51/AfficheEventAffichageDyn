@@ -1,3 +1,24 @@
+// Le design est fait pour 1920x1080 ; on calcule le facteur d'échelle
+// pour que ça tienne dans n'importe quelle fenêtre (plein écran ou non),
+// sans jamais déformer les proportions ni faire chevaucher le contenu.
+function applyScale(){
+
+    const screen = document.getElementById("screen");
+
+    if(!screen) return;
+
+    const scale = Math.min(
+        window.innerWidth / 1920,
+        window.innerHeight / 1080
+    );
+
+    screen.style.transform = `scale(${scale})`;
+
+}
+
+window.addEventListener("resize", applyScale);
+applyScale();
+
 const DATA_URL = "events.json";
 const OVERRIDES_URL = "status-overrides.json";
 
@@ -93,6 +114,54 @@ function computeCountdown(event){
 
 }
 
+// Supprime le dernier segment d'une adresse si c'est un nom de pays
+// (typiquement ", France" ajouté automatiquement par Google Calendar).
+// Heuristique : on retire la dernière partie après la dernière virgule
+// si elle ne contient pas de chiffre (donc pas un code postal ni un n°).
+function stripCountry(location){
+
+    if(!location) return "";
+
+    const parts = location.split(",").map(s => s.trim());
+
+    if(parts.length > 1){
+
+        const last = parts[parts.length - 1];
+
+        // Un code postal ou un numéro de rue contient des chiffres → on garde.
+        if(!/\d/.test(last)){
+            parts.pop();
+        }
+
+    }
+
+    return parts.join(", ");
+
+}
+
+// Résout le texte à afficher pour le lieu selon le mode :
+// 0 → rien
+// 1 → lieu de l'événement Google Calendar (sans pays)
+// 2 → lieu du JSON campaign
+// 3 → lieu événement, puis JSON si l'événement est vide
+// 4 → lieu JSON, puis événement si le JSON est vide
+function resolveLocation(eventLocation, campaignLieu, mode){
+
+    const ev = stripCountry(eventLocation || "");
+    const js = (campaignLieu || "").trim();
+    const modeNum = parseInt(mode, 10);
+
+    switch(modeNum){
+        case 0: return "";
+        case 1: return ev;
+        case 2: return js;
+        case 3: return ev || js;
+        case 4: return js || ev;
+        default: return ev || js; // comportement par défaut si absent
+    }
+
+}
+
 const STATUS_COLORS = {
     "annulé": "#c0392b",
     "annule": "#c0392b",
@@ -125,8 +194,15 @@ function renderEvent(event){
         `${formatHour(start)} – ${formatHour(end)}`;
 
     const locationEl = document.getElementById("eventLocation");
-    if(event.location){
-        locationEl.textContent = event.location;
+
+    const locationText = resolveLocation(
+        event.location,
+        campaign.lieu,
+        campaign.affichage_lieu !== undefined ? campaign.affichage_lieu : 3
+    );
+
+    if(locationText){
+        locationEl.textContent = locationText;
         locationEl.closest(".infoLine").classList.remove("hidden");
     } else {
         locationEl.closest(".infoLine").classList.add("hidden");
@@ -192,6 +268,39 @@ function renderEvent(event){
     }
 
     updateCountdown();
+
+    // Après avoir tout rempli (donc une fois la vraie hauteur du texte
+    // connue, y compris le bandeau de statut qui vient d'apparaître ou
+    // non), on vérifie que ça tient dans l'espace disponible.
+    requestAnimationFrame(fitContent);
+
+}
+
+// Réduit #content dans son ensemble (titre, compte à rebours, photo,
+// infos...) si son contenu naturel dépasse l'espace disponible au-dessus
+// du bandeau de statut, pour qu'aucun texte ne soit jamais coupé/masqué,
+// quelle que soit la longueur du titre ou des autres champs.
+function fitContent(){
+
+    const content = document.getElementById("content");
+    const screen = document.getElementById("screen");
+    const bottomZone = document.getElementById("bottomZone");
+
+    if(!content || !screen) return;
+
+    // On repart d'une échelle neutre avant de mesurer, sinon une réduction
+    // précédente fausserait la mesure du contenu naturel.
+    content.style.transform = "scale(1)";
+
+    const bottomZoneHeight = bottomZone ? bottomZone.offsetHeight : 0;
+    const available = (screen.clientHeight - bottomZoneHeight) * 0.97;
+
+    const natural = content.scrollHeight;
+
+    if(natural > available && natural > 0){
+        const scale = Math.max(0.5, available / natural);
+        content.style.transform = `scale(${scale})`;
+    }
 
 }
 
