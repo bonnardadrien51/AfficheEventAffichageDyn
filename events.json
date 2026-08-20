@@ -1,12 +1,12 @@
 {
-  "updated": "20/08/2026 08:52:45",
+  "updated": "20/08/2026 09:26:51",
   "events": [
     {
       "uid": "0i3ruisn9mmmla4k183u3d10mq@google.com",
       "title": "Pot d'accueil",
       "location": "",
       "start": "2026-08-22T07:00:00.000Z",
-      "end": "2026-08-22T07:30:00.000Z",
+      "end": "2026-08-22T08:00:00.000Z",
       "campaign": null
     },
     {
@@ -16,23 +16,6 @@
       "start": "2026-08-22T07:30:00.000Z",
       "end": "2026-08-22T10:00:00.000Z",
       "campaign": null
-    },
-    {
-      "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
-      "title": "Création Boomerang ",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T18:00:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon vole 2026",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
-        "logo_fond": "",
-        "fond": "",
-        "tarif": "",
-        "inscription": "",
-        "statut": ""
-      }
     },
     {
       "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
@@ -51,6 +34,23 @@
       "campaign": {
         "titre": "Tout Besançon vole 2026",
         "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/VR.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
+        "logo_fond": "",
+        "fond": "",
+        "tarif": "",
+        "inscription": "",
+        "statut": ""
+      }
+    },
+    {
+      "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
+      "title": "Création Boomerang ",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T18:00:00.000Z",
+      "campaign": {
+        "titre": "Tout Besançon vole 2026",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
         "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
         "logo_fond": "",
         "fond": "",
