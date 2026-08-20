@@ -1,7 +1,12 @@
 const DATA_URL = "events.json";
 const OVERRIDES_URL = "status-overrides.json";
 
+// Recharge les données toutes les 60 secondes
 const REFRESH_MS = 60 * 1000;
+
+// Vérifie les événements terminés toutes les 10 secondes
+const CHECK_EVENTS_MS = 10 * 1000;
+
 
 const STATUS_COLORS = {
     "annulé": "#c0392b",
@@ -10,6 +15,7 @@ const STATUS_COLORS = {
     "reporté": "#6c5ce7",
     "reporte": "#6c5ce7"
 };
+
 
 const shortWeekdays = [
     "DIM",
@@ -22,12 +28,30 @@ const shortWeekdays = [
 ];
 
 
+/*
+============================================================
+DONNÉES EN MÉMOIRE
+============================================================
+*/
+
+let allEvents = [];
+let overrides = {};
+
+
+/*
+============================================================
+OUTILS DE DATE
+============================================================
+*/
+
 function dateOnly(date) {
+
     return new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate()
     );
+
 }
 
 
@@ -40,13 +64,46 @@ function isToday(date) {
         ===
         today.getTime()
     );
+
 }
 
 
+/*
+============================================================
+VÉRIFIER SI UN ÉVÉNEMENT EST TERMINÉ
+============================================================
+
+Un événement est considéré comme terminé lorsque
+son heure de FIN est dépassée.
+============================================================
+*/
+
+function isFinished(event) {
+
+    if (!event.end) {
+        return false;
+    }
+
+    const end =
+        new Date(event.end);
+
+    return end.getTime() <= Date.now();
+}
+
+
+/*
+============================================================
+FORMATER L'HEURE
+============================================================
+*/
+
 function formatHour(date) {
 
-    const h = date.getHours();
-    const m = date.getMinutes();
+    const h =
+        date.getHours();
+
+    const m =
+        date.getMinutes();
 
     return m === 0
         ? `${h}h`
@@ -54,17 +111,31 @@ function formatHour(date) {
 }
 
 
-function renderCard(event, overrides) {
+/*
+============================================================
+CRÉATION D'UNE CARTE
+============================================================
+*/
 
-    const start = new Date(event.start);
-    const end = new Date(event.end);
+function renderCard(event) {
+
+    const start =
+        new Date(event.start);
+
+    const end =
+        new Date(event.end);
+
 
     const statut =
-        (overrides[event.uid] &&
-            overrides[event.uid].statut)
+        (
+            overrides[event.uid] &&
+            overrides[event.uid].statut
+        )
         ||
-        (event.campaign &&
-            event.campaign.statut)
+        (
+            event.campaign &&
+            event.campaign.statut
+        )
         ||
         "";
 
@@ -72,34 +143,55 @@ function renderCard(event, overrides) {
     const card =
         document.createElement("div");
 
-    card.className = "eventCard";
+    card.className =
+        "eventCard";
 
 
-    const badgeHtml = statut
-        ? `
+    /*
+    ------------------------------------------------------------
+    BADGE DE STATUT
+    ------------------------------------------------------------
+    */
+
+    const badgeHtml =
+        statut
+        ?
+        `
             <div
                 class="statusBadge"
                 style="
                     background:
                     ${
                         STATUS_COLORS[
-                            statut.trim().toLowerCase()
-                        ] || "#c0392b"
+                            statut
+                                .trim()
+                                .toLowerCase()
+                        ]
+                        ||
+                        "#c0392b"
                     }
                 "
             >
                 ${statut}
             </div>
         `
-        : "";
+        :
+        "";
 
+
+    /*
+    ------------------------------------------------------------
+    IMAGE
+    ------------------------------------------------------------
+    */
 
     const thumbHtml =
         (
             event.campaign &&
             event.campaign.image
         )
-        ? `
+        ?
+        `
             <div class="thumb">
 
                 <img
@@ -109,8 +201,15 @@ function renderCard(event, overrides) {
 
             </div>
         `
-        : "";
+        :
+        "";
 
+
+    /*
+    ------------------------------------------------------------
+    CONTENU DE LA CARTE
+    ------------------------------------------------------------
+    */
 
     card.innerHTML = `
 
@@ -202,7 +301,8 @@ function renderCard(event, overrides) {
                             </span>
 
                         `
-                        : ""
+                        :
+                        ""
                     }
 
                 </div>
@@ -221,122 +321,64 @@ function renderCard(event, overrides) {
 }
 
 
-async function loadEvents() {
+/*
+============================================================
+RÉCUPÉRER LES ÉVÉNEMENTS À AFFICHER
+============================================================
 
-    const grid =
-        document.getElementById("eventGrid");
+1. Aujourd'hui
+2. Non terminés
+3. Triés par heure de début
+============================================================
+*/
 
+function getTodayEvents() {
 
-    let events = [];
-    let overrides = {};
+    return allEvents
 
-
-    /*
-    ============================================================
-    CHARGEMENT DES ÉVÉNEMENTS
-    ============================================================
-    */
-
-    try {
-
-        const res =
-            await fetch(
-                DATA_URL +
-                "?t=" +
-                Date.now()
-            );
-
-
-        if (!res.ok) {
-
-            throw new Error(
-                "Impossible de charger events.json"
-            );
-
-        }
-
-
-        const json =
-            await res.json();
-
-
-        events =
-            json.events || [];
-
-    }
-    catch (error) {
-
-        console.error(
-            "Erreur events.json :",
-            error
-        );
-
-        return;
-    }
-
-
-    /*
-    ============================================================
-    CHARGEMENT DES STATUTS
-    ============================================================
-    */
-
-    try {
-
-        const res =
-            await fetch(
-                OVERRIDES_URL +
-                "?t=" +
-                Date.now()
-            );
-
-
-        if (res.ok) {
-
-            overrides =
-                await res.json();
-
-        }
-
-    }
-    catch (error) {
-
-        /*
-        Le fichier peut ne pas exister.
-        Ce n'est pas bloquant.
-        */
-
-        overrides = {};
-
-    }
-
-
-    /*
-    ============================================================
-    ÉVÉNEMENTS D'AUJOURD'HUI
-    ============================================================
-    
-    IMPORTANT :
-    Aucun .slice(0, 6) ici.
-
-    Tous les événements du jour sont chargés.
-    pagination.js se charge ensuite d'en afficher 6.
-    ============================================================
-    */
-
-    const todayEvents =
-        events.filter(
+        .filter(
             event =>
+                event.start &&
                 isToday(
                     new Date(event.start)
                 )
+        )
+
+        .filter(
+            event =>
+                !isFinished(event)
+        )
+
+        .sort(
+            (a, b) =>
+                new Date(a.start) -
+                new Date(b.start)
+        );
+}
+
+
+/*
+============================================================
+AFFICHER LES ÉVÉNEMENTS
+============================================================
+*/
+
+function renderEvents() {
+
+    const grid =
+        document.getElementById(
+            "eventGrid"
         );
 
 
+    const todayEvents =
+        getTodayEvents();
+
+
     /*
-    ============================================================
+    ------------------------------------------------------------
     DATE
-    ============================================================
+    ------------------------------------------------------------
     */
 
     document.getElementById(
@@ -354,9 +396,9 @@ async function loadEvents() {
 
 
     /*
-    ============================================================
+    ------------------------------------------------------------
     AUCUN ÉVÉNEMENT
-    ============================================================
+    ------------------------------------------------------------
     */
 
     if (!todayEvents.length) {
@@ -377,9 +419,16 @@ async function loadEvents() {
 
 
     /*
-    ============================================================
-    AFFICHAGE DE TOUS LES ÉVÉNEMENTS
-    ============================================================
+    ------------------------------------------------------------
+    AFFICHER TOUS LES ÉVÉNEMENTS
+    ------------------------------------------------------------
+    
+    IMPORTANT :
+    Il n'y a volontairement PAS de .slice(0, 6).
+
+    pagination.js s'occupe de limiter l'affichage
+    à 6 événements par page.
+    ------------------------------------------------------------
     */
 
     grid.innerHTML = "";
@@ -389,14 +438,157 @@ async function loadEvents() {
         event => {
 
             grid.appendChild(
-                renderCard(
-                    event,
-                    overrides
-                )
+                renderCard(event)
             );
 
         }
     );
+}
+
+
+/*
+============================================================
+CHARGER EVENTS.JSON
+============================================================
+*/
+
+async function loadEvents() {
+
+    try {
+
+        const res =
+            await fetch(
+                DATA_URL +
+                "?t=" +
+                Date.now()
+            );
+
+
+        if (!res.ok) {
+
+            throw new Error(
+                "Impossible de charger events.json"
+            );
+        }
+
+
+        const json =
+            await res.json();
+
+
+        allEvents =
+            json.events || [];
+
+
+        /*
+        --------------------------------------------------------
+        CHARGER LES OVERRIDES
+        --------------------------------------------------------
+        */
+
+        try {
+
+            const overrideRes =
+                await fetch(
+                    OVERRIDES_URL +
+                    "?t=" +
+                    Date.now()
+                );
+
+
+            if (overrideRes.ok) {
+
+                overrides =
+                    await overrideRes.json();
+
+            }
+            else {
+
+                overrides = {};
+
+            }
+
+        }
+        catch (error) {
+
+            overrides = {};
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        AFFICHAGE
+        --------------------------------------------------------
+        */
+
+        renderEvents();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Erreur de chargement :",
+            error
+        );
+
+    }
+}
+
+
+/*
+============================================================
+VÉRIFICATION DES ÉVÉNEMENTS TERMINÉS
+============================================================
+
+Cette fonction ne recharge PAS events.json.
+
+Elle vérifie simplement si un événement vient
+de se terminer.
+
+Cela permet de le retirer rapidement.
+============================================================
+*/
+
+function checkFinishedEvents() {
+
+    const grid =
+        document.getElementById(
+            "eventGrid"
+        );
+
+
+    if (!grid) {
+        return;
+    }
+
+
+    const visibleEvents =
+        getTodayEvents();
+
+
+    /*
+    ------------------------------------------------------------
+    Si le nombre d'événements actuellement affichés
+    est différent du nombre d'événements calculé,
+    on reconstruit la grille.
+    ------------------------------------------------------------
+    */
+
+    const currentCards =
+        grid.querySelectorAll(
+            ".eventCard"
+        ).length;
+
+
+    if (
+        currentCards !==
+        visibleEvents.length
+    ) {
+
+        renderEvents();
+
+    }
 }
 
 
@@ -411,11 +603,23 @@ loadEvents();
 
 /*
 ============================================================
-ACTUALISATION TOUTES LES 60 SECONDES
+RECHARGEMENT DES DONNÉES
 ============================================================
 */
 
 setInterval(
     loadEvents,
     REFRESH_MS
+);
+
+
+/*
+============================================================
+VÉRIFICATION DES ÉVÉNEMENTS TERMINÉS
+============================================================
+*/
+
+setInterval(
+    checkFinishedEvents,
+    CHECK_EVENTS_MS
 );
