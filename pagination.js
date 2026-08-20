@@ -87,7 +87,6 @@
         const events =
             getEvents();
 
-
         totalPages =
             Math.max(
                 1,
@@ -116,7 +115,7 @@
 
     /*
     ============================================================
-    INDICATEUR
+    INDICATEUR DE PAGE
     ============================================================
     */
 
@@ -136,15 +135,81 @@
 
         if (totalPages <= 1) {
 
-            indicator.textContent = "";
+            indicator.innerHTML = "";
 
             return;
 
         }
 
 
-        indicator.textContent =
-            `${currentPage + 1} / ${totalPages}`;
+        /*
+        Affichage :
+
+        ‹ 1 / 2 ›
+
+        */
+
+        indicator.innerHTML = `
+
+            <button
+                id="previousPageButton"
+                class="pageArrow"
+                aria-label="Page précédente"
+                type="button"
+            >‹</button>
+
+            <span class="pageNumber">
+                ${currentPage + 1} / ${totalPages}
+            </span>
+
+            <button
+                id="nextPageButton"
+                class="pageArrow"
+                aria-label="Page suivante"
+                type="button"
+            >›</button>
+
+        `;
+
+
+        /*
+        Bouton page précédente
+        */
+
+        const previousButton =
+            document.getElementById(
+                "previousPageButton"
+            );
+
+
+        /*
+        Bouton page suivante
+        */
+
+        const nextButton =
+            document.getElementById(
+                "nextPageButton"
+            );
+
+
+        if (previousButton) {
+
+            previousButton.addEventListener(
+                "click",
+                previousPage
+            );
+
+        }
+
+
+        if (nextButton) {
+
+            nextButton.addEventListener(
+                "click",
+                nextPage
+            );
+
+        }
 
     }
 
@@ -175,7 +240,7 @@
 
             if (indicator) {
 
-                indicator.textContent = "";
+                indicator.innerHTML = "";
 
             }
 
@@ -247,6 +312,10 @@
         );
 
 
+        /*
+        Mise à jour de l'indicateur.
+        */
+
         updateIndicator();
 
 
@@ -281,6 +350,56 @@
             );
 
         }
+
+    }
+
+
+    /*
+    ============================================================
+    PAGE PRÉCÉDENTE
+    ============================================================
+    */
+
+    function previousPage() {
+
+        calculatePages();
+
+
+        /*
+        Une seule page :
+        aucun changement.
+        */
+
+        if (
+            totalPages <= 1
+        ) {
+
+            return;
+
+        }
+
+
+        const previous =
+            (
+                currentPage - 1 +
+                totalPages
+            )
+            %
+            totalPages;
+
+
+        showPage(
+            previous,
+            true
+        );
+
+
+        /*
+        Le clic manuel remet le
+        compteur de 10 secondes à zéro.
+        */
+
+        restartTimer();
 
     }
 
@@ -323,6 +442,17 @@
             true
         );
 
+
+        /*
+        Le clic manuel remet le
+        compteur de 10 secondes à zéro.
+
+        Cela est également appelé par
+        le changement automatique.
+        */
+
+        restartTimer();
+
     }
 
 
@@ -356,7 +486,7 @@
     ============================================================
     OBSERVATION DU DOM
     ============================================================
-    
+
     jour.js et prochain-jour.js
     reconstruisent #eventGrid toutes
     les 60 secondes.
@@ -417,7 +547,7 @@
 
     /*
     ============================================================
-    STYLE D'ANIMATION
+    STYLE D'ANIMATION + NAVIGATION
     ============================================================
     */
 
@@ -429,20 +559,41 @@
 
     style.textContent = `
 
+        /*
+        --------------------------------------------------------
+        ANIMATION DU GRILLE
+        --------------------------------------------------------
+        */
+
         #eventGrid {
+
             transition:
                 opacity
                 ${FADE_DURATION}ms
                 ease;
+
         }
+
 
         #eventGrid.pagination-hidden {
+
             opacity: 0;
+
         }
 
+
         #eventGrid.pagination-visible {
+
             opacity: 1;
+
         }
+
+
+        /*
+        --------------------------------------------------------
+        INDICATEUR DE PAGE
+        --------------------------------------------------------
+        */
 
         #pageIndicator {
 
@@ -450,6 +601,14 @@
 
             right: 2vw;
             bottom: 1.5vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 0.4vw;
 
             font-family:
                 "Baloo 2",
@@ -463,11 +622,110 @@
 
             color: white;
 
-            opacity: 0.65;
-
-            pointer-events: none;
+            opacity: 0.75;
 
             z-index: 1000;
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        NUMÉRO DE PAGE
+        --------------------------------------------------------
+        */
+
+        #pageIndicator .pageNumber {
+
+            min-width: 3vw;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        FLÈCHES
+        --------------------------------------------------------
+        */
+
+        #pageIndicator .pageArrow {
+
+            border: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-family:
+                "Baloo 2",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 1.8vw;
+
+            font-weight: 700;
+
+            line-height: 1;
+
+            padding: 0.1vw 0.3vw;
+
+            margin: 0;
+
+            cursor: pointer;
+
+            opacity: 0.7;
+
+            transition:
+                transform 0.15s ease,
+                opacity 0.15s ease;
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        SURVOL
+        --------------------------------------------------------
+        */
+
+        #pageIndicator .pageArrow:hover {
+
+            opacity: 1;
+
+            transform:
+                scale(1.2);
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        CLIC
+        --------------------------------------------------------
+        */
+
+        #pageIndicator .pageArrow:active {
+
+            transform:
+                scale(0.9);
+
+        }
+
+
+        /*
+        --------------------------------------------------------
+        FOCUS
+        --------------------------------------------------------
+        */
+
+        #pageIndicator .pageArrow:focus {
+
+            outline: none;
 
         }
 
