@@ -1,14 +1,6 @@
 {
-  "updated": "21/08/2026 18:38:55",
+  "updated": "21/08/2026 19:32:49",
   "events": [
-    {
-      "uid": "43apidbvemqav4i28h4t0pm77j@google.com",
-      "title": "Réunion Bénévole TBV 2026",
-      "location": "Salle Polyvalente de la Malcombe, Besançon",
-      "start": "2026-08-21T16:00:00.000Z",
-      "end": "2026-08-21T17:00:00.000Z",
-      "campaign": null
-    },
     {
       "uid": "2gqli5ghfb1mpavgmke8mat7lc@google.com",
       "title": "Briefing Pilotes TBV 2026",
@@ -75,14 +67,33 @@
       }
     },
     {
-      "uid": "0a11kkda0q9n8qt5f9nfaec200@google.com",
-      "title": "Réalité virtuelle",
+      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
+      "title": "Biplaces associatif",
+      "location": "Port Douvot, Besançon",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T16:00:00.000Z",
+      "campaign": {
+        "titre": "Tout Besançon Vole",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Biplace.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
+        "logo_fond": "#ffffff",
+        "fond": "",
+        "tarif": "Prix minimum conseillé : 70€",
+        "inscription": "",
+        "statut": "",
+        "lieu": "Port Douvot, Besançon",
+        "affichage_lieu": "3"
+      }
+    },
+    {
+      "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
+      "title": "Création Boomerang",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-22T08:00:00.000Z",
       "end": "2026-08-22T18:00:00.000Z",
       "campaign": {
         "titre": "Tout Besançon vole 2026",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/VR.jpg",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
         "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
         "logo_fond": "",
         "fond": "",
@@ -113,6 +124,25 @@
       }
     },
     {
+      "uid": "0a11kkda0q9n8qt5f9nfaec200@google.com",
+      "title": "Réalité virtuelle",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-22T08:00:00.000Z",
+      "end": "2026-08-22T18:00:00.000Z",
+      "campaign": {
+        "titre": "Tout Besançon vole 2026",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/VR.jpg",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
+        "logo_fond": "",
+        "fond": "",
+        "tarif": "",
+        "inscription": "",
+        "statut": "",
+        "lieu": "",
+        "affichage_lieu": "3"
+      }
+    },
+    {
       "uid": "553jtlvssetj8hpkbp62edota9@google.com",
       "title": "Buvette",
       "location": "Le Port Douvot, Besançon",
@@ -125,44 +155,6 @@
         "logo_fond": "#ffffff",
         "fond": "",
         "tarif": "",
-        "inscription": "",
-        "statut": "",
-        "lieu": "Port Douvot, Besançon",
-        "affichage_lieu": "3"
-      }
-    },
-    {
-      "uid": "07872vmsvhiibbo1ovgmgcpgqb@google.com",
-      "title": "Création Boomerang",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T18:00:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon vole 2026",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/boomerangCarre.jpg",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Logo/Logo%20TBV%20SVG.svg",
-        "logo_fond": "",
-        "fond": "",
-        "tarif": "",
-        "inscription": "",
-        "statut": "",
-        "lieu": "",
-        "affichage_lieu": "3"
-      }
-    },
-    {
-      "uid": "7chlj9ancoh91b3n39vn5kplhk@google.com",
-      "title": "Biplaces associatif",
-      "location": "Port Douvot, Besançon",
-      "start": "2026-08-22T08:00:00.000Z",
-      "end": "2026-08-22T16:00:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon Vole",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Biplace.jpg",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
-        "logo_fond": "#ffffff",
-        "fond": "",
-        "tarif": "Prix minimum conseillé : 70€",
         "inscription": "",
         "statut": "",
         "lieu": "Port Douvot, Besançon",
@@ -208,14 +200,14 @@
       }
     },
     {
-      "uid": "2evp0sd8crtpastgonlqn7prgg@google.com",
-      "title": "Massage avec La bulle de Marion",
+      "uid": "1fr6ko8u0am2pl04fb2n6bp9o8@google.com",
+      "title": "Massage avec Les Envolées Magiques",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-22T11:00:00.000Z",
       "end": "2026-08-22T16:00:00.000Z",
       "campaign": {
         "titre": "Tout Besançon Vole",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/marion.png",
+        "image": "",
         "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
         "logo_fond": "#ffffff",
         "fond": "",
@@ -235,14 +227,14 @@
       "campaign": null
     },
     {
-      "uid": "1fr6ko8u0am2pl04fb2n6bp9o8@google.com",
-      "title": "Massage avec Les Envolées Magiques",
+      "uid": "2evp0sd8crtpastgonlqn7prgg@google.com",
+      "title": "Massage avec La bulle de Marion",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-22T11:00:00.000Z",
       "end": "2026-08-22T16:00:00.000Z",
       "campaign": {
         "titre": "Tout Besançon Vole",
-        "image": "",
+        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/marion.png",
         "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
         "logo_fond": "#ffffff",
         "fond": "",
@@ -300,23 +292,12 @@
       }
     },
     {
-      "uid": "68ifp52i0b8focss623je99pfb@google.com",
-      "title": "Massage avec Anne-Laure Haye Nappey",
+      "uid": "3493jnbtqomr916fuk058gd1a0@google.com",
+      "title": "Jeux en bois, ... avec Culture Jeux",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T16:00:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon Vole",
-        "image": "",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
-        "logo_fond": "#ffffff",
-        "fond": "",
-        "tarif": "Gratuit",
-        "inscription": "",
-        "statut": "",
-        "lieu": "Port Douvot, Besançon",
-        "affichage_lieu": "3"
-      }
+      "campaign": null
     },
     {
       "uid": "4e0i3m9q7kctb1750l030649vb@google.com",
@@ -346,27 +327,38 @@
       }
     },
     {
-      "uid": "3onk3frl303i6i1g33ogeo2tca@google.com",
-      "title": "Buvette",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-23T08:00:00.000Z",
-      "end": "2026-08-23T16:00:00.000Z",
-      "campaign": null
-    },
-    {
-      "uid": "3493jnbtqomr916fuk058gd1a0@google.com",
-      "title": "Jeux en bois, ... avec Culture Jeux",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-23T08:00:00.000Z",
-      "end": "2026-08-23T16:00:00.000Z",
-      "campaign": null
-    },
-    {
       "uid": "7bqtdisaiudklpid8cggv4gaj0@google.com",
       "title": "Création Boomerang",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T15:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "68ifp52i0b8focss623je99pfb@google.com",
+      "title": "Massage avec Anne-Laure Haye Nappey",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-23T08:00:00.000Z",
+      "end": "2026-08-23T16:00:00.000Z",
+      "campaign": {
+        "titre": "Tout Besançon Vole",
+        "image": "",
+        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
+        "logo_fond": "#ffffff",
+        "fond": "",
+        "tarif": "Gratuit",
+        "inscription": "",
+        "statut": "",
+        "lieu": "Port Douvot, Besançon",
+        "affichage_lieu": "3"
+      }
+    },
+    {
+      "uid": "3onk3frl303i6i1g33ogeo2tca@google.com",
+      "title": "Buvette",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-23T08:00:00.000Z",
+      "end": "2026-08-23T16:00:00.000Z",
       "campaign": null
     },
     {
