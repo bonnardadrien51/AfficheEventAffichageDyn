@@ -1,5 +1,5 @@
 {
-  "updated": "23/08/2026 00:50:22",
+  "updated": "23/08/2026 01:24:34",
   "events": [
     {
       "uid": "7iuq2gtld106uacul78ghlftga@google.com",
@@ -48,22 +48,6 @@
       }
     },
     {
-      "uid": "7bqtdisaiudklpid8cggv4gaj0@google.com",
-      "title": "Création Boomerang",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-23T08:00:00.000Z",
-      "end": "2026-08-23T15:00:00.000Z",
-      "campaign": null
-    },
-    {
-      "uid": "3493jnbtqomr916fuk058gd1a0@google.com",
-      "title": "Jeux en bois, ... avec Culture Jeux",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-23T08:00:00.000Z",
-      "end": "2026-08-23T16:00:00.000Z",
-      "campaign": null
-    },
-    {
       "uid": "68ifp52i0b8focss623je99pfb@google.com",
       "title": "Massage avec Anne-Laure Haye Nappey",
       "location": "Le Port Douvot, Besançon",
@@ -83,8 +67,24 @@
       }
     },
     {
+      "uid": "7bqtdisaiudklpid8cggv4gaj0@google.com",
+      "title": "Création Boomerang",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-23T08:00:00.000Z",
+      "end": "2026-08-23T15:00:00.000Z",
+      "campaign": null
+    },
+    {
       "uid": "3onk3frl303i6i1g33ogeo2tca@google.com",
       "title": "Buvette",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-23T08:00:00.000Z",
+      "end": "2026-08-23T16:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "3493jnbtqomr916fuk058gd1a0@google.com",
+      "title": "Jeux en bois, ... avec Culture Jeux",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T16:00:00.000Z",
