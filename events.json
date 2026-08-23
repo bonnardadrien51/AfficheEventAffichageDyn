@@ -1,14 +1,6 @@
 {
-  "updated": "23/08/2026 12:27:46",
+  "updated": "23/08/2026 12:52:47",
   "events": [
-    {
-      "uid": "4e0i3m9q7kctb1750l030649vb@google.com",
-      "title": "Réalité virtuelle",
-      "location": "Le Port Douvot, Besançon",
-      "start": "2026-08-23T08:00:00.000Z",
-      "end": "2026-08-23T16:00:00.000Z",
-      "campaign": null
-    },
     {
       "uid": "68ifp52i0b8focss623je99pfb@google.com",
       "title": "Massage avec Anne-Laure Haye Nappey",
@@ -66,6 +58,14 @@
     {
       "uid": "3onk3frl303i6i1g33ogeo2tca@google.com",
       "title": "Buvette",
+      "location": "Le Port Douvot, Besançon",
+      "start": "2026-08-23T08:00:00.000Z",
+      "end": "2026-08-23T16:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "4e0i3m9q7kctb1750l030649vb@google.com",
+      "title": "Réalité virtuelle",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T16:00:00.000Z",
