@@ -1,5 +1,5 @@
 {
-  "updated": "23/08/2026 17:26:17",
+  "updated": "23/08/2026 17:49:19",
   "events": [
     {
       "uid": "3onk3frl303i6i1g33ogeo2tca@google.com",
@@ -29,16 +29,16 @@
       }
     },
     {
-      "uid": "4e0i3m9q7kctb1750l030649vb@google.com",
-      "title": "Réalité virtuelle",
+      "uid": "3493jnbtqomr916fuk058gd1a0@google.com",
+      "title": "Jeux en bois, ... avec Culture Jeux",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T16:00:00.000Z",
       "campaign": null
     },
     {
-      "uid": "3493jnbtqomr916fuk058gd1a0@google.com",
-      "title": "Jeux en bois, ... avec Culture Jeux",
+      "uid": "4e0i3m9q7kctb1750l030649vb@google.com",
+      "title": "Réalité virtuelle",
       "location": "Le Port Douvot, Besançon",
       "start": "2026-08-23T08:00:00.000Z",
       "end": "2026-08-23T16:00:00.000Z",
@@ -102,19 +102,19 @@
       }
     },
     {
-      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
-      "title": "Réalité virtuelle",
-      "location": "",
-      "start": "2026-08-30T08:00:00.000Z",
-      "end": "2026-08-30T15:00:00.000Z",
-      "campaign": null
-    },
-    {
       "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
       "title": "Buvette",
       "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-30T08:00:00.000Z",
       "end": "2026-08-30T16:00:00.000Z",
+      "campaign": null
+    },
+    {
+      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
+      "title": "Réalité virtuelle",
+      "location": "",
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T15:00:00.000Z",
       "campaign": null
     }
   ]
