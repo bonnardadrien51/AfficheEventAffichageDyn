@@ -1,4 +1,3 @@
-```js
 // Le design est fait pour 1920x1080 ; on calcule le facteur d'échelle
 // pour que ça tienne dans n'importe quelle fenêtre (plein écran ou non),
 // sans jamais déformer les proportions ni faire chevaucher le contenu.
@@ -871,4 +870,3 @@ setInterval(
     updateCountdown,
     REFRESH_COUNTDOWN_MS
 );
-```
