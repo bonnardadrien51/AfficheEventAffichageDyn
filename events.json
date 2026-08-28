@@ -1,25 +1,13 @@
 {
-  "updated": "28/08/2026 13:12:01",
+  "updated": "28/08/2026 20:22:43",
   "events": [
     {
-      "uid": "49tn259n2v1qvsq9a4bfj12161@google.com",
-      "title": "Test",
+      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
+      "title": "Réalité virtuelle",
       "location": "",
-      "start": "2026-08-28T14:15:00.000Z",
-      "end": "2026-08-28T16:15:00.000Z",
-      "campaign": {
-        "titre": "Tout Besançon Vole",
-        "image": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBV%20Image%20Event/brioche.jpg",
-        "logo": "https://bonnardadrien51.github.io/AfficheEventAffichageDyn/img/BVL/TBVLogo/LogoTBVBlanc.svg",
-        "logo_fond": "#ffffff",
-        "fond": "",
-        "tarif": "Gratuit",
-        "inscription": "Réservation conseillée",
-        "lien_inscription": "https://booking.myrezapp.com/fr/online/booking/minisite/18523/tout-besancon-vole",
-        "statut": "",
-        "lieu": "Port Douvot, Besançon",
-        "affichage_lieu": "3"
-      }
+      "start": "2026-08-30T08:00:00.000Z",
+      "end": "2026-08-30T15:00:00.000Z",
+      "campaign": null
     },
     {
       "uid": "2gdtbf2od8cr3pi2krm14t40jh@google.com",
@@ -27,14 +15,6 @@
       "location": "Le Port Douvot, 25000 Besançon, France",
       "start": "2026-08-30T08:00:00.000Z",
       "end": "2026-08-30T16:00:00.000Z",
-      "campaign": null
-    },
-    {
-      "uid": "5fgh7mmivfo8497vjd3usss206@google.com",
-      "title": "Réalité virtuelle",
-      "location": "",
-      "start": "2026-08-30T08:00:00.000Z",
-      "end": "2026-08-30T15:00:00.000Z",
       "campaign": null
     }
   ]
