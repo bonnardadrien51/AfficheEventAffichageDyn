@@ -269,7 +269,33 @@ document
         }
     );
 
+/*
+============================================================
+PRÉRÉGLAGES D'INSCRIPTION
+============================================================
+*/
 
+document
+    .querySelectorAll(".inscriptionPresetBtn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const text =
+                    button.dataset.text || "";
+
+                document.getElementById(
+                    "f_inscription"
+                ).value = text;
+
+                generate();
+
+            }
+        );
+
+    });
 /*
 ============================================================
 RÉINITIALISER
