@@ -6,6 +6,7 @@ const fields = [
     "fond",
     "tarif",
     "inscription",
+    "lien_inscription",
     "statut",
     "lieu",
     "affichage_lieu"
