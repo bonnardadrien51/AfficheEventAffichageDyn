@@ -69,6 +69,58 @@ body{
 
 }
 
+#registrationBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    margin-left: 30px;
+
+    min-width: 260px;
+}
+
+#registrationBox.hidden {
+    display: none;
+}
+
+#registrationQr {
+    width: 220px;
+    height: 220px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+}
+
+#registrationQr img {
+    width: 220px;
+    height: 220px;
+
+    display: block;
+}
+
+#registrationQrText {
+    margin-top: 12px;
+
+    color: #111;
+
+    font-family: "Baloo 2", sans-serif;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    text-align: center;
+}
+
 /* Assombrit une éventuelle photo de fond pour garder le texte lisible.
    Reste invisible (display:none, posé par script.js) tant qu'aucune
    photo de fond n'est définie sur l'événement. */
