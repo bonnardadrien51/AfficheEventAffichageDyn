@@ -155,6 +155,7 @@ function parseCampaign(rawDescription) {
       // Informations commerciales
       tarif: cleanText(data.tarif),
       inscription: cleanText(data.inscription),
+      lien_inscription: cleanUrl(data.lien_inscription),
 
       // Statut
       statut: cleanText(data.statut),
@@ -223,6 +224,7 @@ function emptyCampaign() {
 
     tarif: "",
     inscription: "",
+    lien_inscription: "",
 
     statut: "",
 
