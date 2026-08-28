@@ -13,6 +13,9 @@
     <title>Affichage dynamique - Prochain événement</title>
 
     <link rel="stylesheet" href="style.css">
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
 
 </head>
 
@@ -91,7 +94,15 @@
             </div>
 
         </div>
-
+               <div id="registrationBox" class="hidden">
+        
+            <div id="registrationQr"></div>
+        
+            <div id="registrationQrText">
+                Scannez pour vous inscrire
+            </div>
+        
+        </div>
     </div>
 
     <div id="noEvent">
