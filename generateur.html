@@ -219,15 +219,63 @@
 
 
         <label>
-
             Inscription
-
+        
+            <div class="inscriptionPresets">
+        
+                <button
+                    type="button"
+                    class="inscriptionPresetBtn"
+                    data-text="Réservation conseillée"
+                >
+                    Réservation conseillée
+                </button>
+        
+                <button
+                    type="button"
+                    class="inscriptionPresetBtn"
+                    data-text="Réservation obligatoire"
+                >
+                    Réservation obligatoire
+                </button>
+        
+                <button
+                    type="button"
+                    class="inscriptionPresetBtn"
+                    data-text="Réservation sur place et en ligne"
+                >
+                    Sur place et en ligne
+                </button>
+        
+            </div>
+        
             <input
                 id="f_inscription"
                 type="text"
-                placeholder="Ex: Sur inscription / Réservation conseillée"
+                placeholder="Texte libre..."
             >
-
+        
+            <span class="fieldHint">
+                Les boutons préremplissent le texte, mais vous pouvez ensuite le modifier librement.
+            </span>
+        
+        </label>
+        
+        
+        <label>
+        
+            Lien d'inscription
+        
+            <input
+                id="f_lien_inscription"
+                type="url"
+                placeholder="https://..."
+            >
+        
+            <span class="fieldHint">
+                Si un lien est renseigné, un QR code sera automatiquement généré sur l'affiche.
+            </span>
+        
         </label>
 
 
