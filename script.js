@@ -36,10 +36,6 @@ const REFRESH_COUNTDOWN_MS = 30 * 1000;
 let currentEvent = null;
 
 
-// ============================================================
-// FORMATAGE
-// ============================================================
-
 function formatHour(date){
 
     const h = date.getHours();
@@ -84,10 +80,6 @@ function dateOnly(d){
 }
 
 
-// ============================================================
-// COMPTE À REBOURS
-// ============================================================
-
 function computeCountdown(event){
 
     const now = new Date();
@@ -104,7 +96,7 @@ function computeCountdown(event){
 
     if(diffMs <= 0){
 
-        return null;
+        return null; // événement terminé, ne devrait plus être affiché
 
     }
 
@@ -231,10 +223,6 @@ function resolveLocation(
 }
 
 
-// ============================================================
-// STATUTS
-// ============================================================
-
 const STATUS_COLORS = {
 
     "annulé": "#c0392b",
@@ -247,7 +235,7 @@ const STATUS_COLORS = {
 
 
 // ============================================================
-// QR CODE / INSCRIPTION
+// QR CODE D'INSCRIPTION
 // ============================================================
 
 function renderRegistrationQr(campaign){
@@ -273,8 +261,8 @@ function renderRegistrationQr(campaign){
         );
 
 
-    // Si les éléments QR ne sont pas présents dans evenement.html,
-    // on ne fait rien.
+    // Si le HTML ne contient pas encore les éléments du QR,
+    // on ne bloque surtout pas l'affichage de l'événement.
     if(
         !registrationBox ||
         !registrationQr
@@ -298,9 +286,9 @@ function renderRegistrationQr(campaign){
             : "";
 
 
-    // ========================================================
-    // AUCUN LIEN
-    // ========================================================
+    // --------------------------------------------------------
+    // Aucun lien
+    // --------------------------------------------------------
 
     if(!url){
 
@@ -321,15 +309,17 @@ function renderRegistrationQr(campaign){
     }
 
 
-    // ========================================================
-    // LIEN CLIQUABLE
-    // ========================================================
+    // --------------------------------------------------------
+    // Lien cliquable
+    // --------------------------------------------------------
 
     if(registrationLink){
 
-        registrationLink.href = url;
+        registrationLink.href =
+            url;
 
-        registrationLink.target = "_blank";
+        registrationLink.target =
+            "_blank";
 
         registrationLink.rel =
             "noopener noreferrer";
@@ -337,16 +327,16 @@ function renderRegistrationQr(campaign){
     }
 
 
-    // ========================================================
-    // VÉRIFICATION DE LA BIBLIOTHÈQUE
-    // ========================================================
+    // --------------------------------------------------------
+    // Bibliothèque QRCode
+    // --------------------------------------------------------
 
     if(
         typeof QRCode === "undefined"
     ){
 
         console.error(
-            "QRCode n'est pas chargé. Vérifie que qrcode.min.js est chargé avant script.js."
+            "QRCode n'est pas chargé. Vérifie que qrcode.min.js est présent avant script.js."
         );
 
         registrationBox.classList.add(
@@ -358,9 +348,9 @@ function renderRegistrationQr(campaign){
     }
 
 
-    // ========================================================
-    // GÉNÉRATION DU QR CODE
-    // ========================================================
+    // --------------------------------------------------------
+    // Génération du QR code
+    // --------------------------------------------------------
 
     try{
 
@@ -412,75 +402,37 @@ function renderRegistrationQr(campaign){
 }
 
 
-// ============================================================
-// AFFICHAGE D'UN ÉVÉNEMENT
-// ============================================================
-
 function renderEvent(event){
 
     currentEvent = event;
 
     document.body.classList.remove("empty");
 
-    const start =
-        new Date(event.start);
+    const start = new Date(event.start);
+    const end = new Date(event.end);
 
-    const end =
-        new Date(event.end);
-
-    const campaign =
-        event.campaign || {};
+    const campaign = event.campaign || {};
 
 
-    // ========================================================
-    // TITRE DE LA CAMPAGNE
-    // ========================================================
-
-    document.getElementById(
-        "campaignTitle"
-    ).textContent =
-        campaign.titre ||
-        event.title;
+    document.getElementById("campaignTitle").textContent =
+        campaign.titre || event.title;
 
 
-    // ========================================================
-    // DATE
-    // ========================================================
-
-    document.getElementById(
-        "campaignDate"
-    ).textContent =
+    document.getElementById("campaignDate").textContent =
         `${formatDate(start)} – ${formatHour(start)}`;
 
 
-    // ========================================================
-    // TITRE DE L'ÉVÉNEMENT
-    // ========================================================
-
-    document.getElementById(
-        "eventTitle"
-    ).textContent =
+    document.getElementById("eventTitle").textContent =
         event.title;
 
 
-    // ========================================================
-    // HORAIRES
-    // ========================================================
-
-    document.getElementById(
-        "eventHours"
-    ).textContent =
+    document.getElementById("eventHours").textContent =
         `${formatHour(start)} – ${formatHour(end)}`;
 
 
-    // ========================================================
-    // LIEU
-    // ========================================================
-
     const locationEl =
-        document.getElementById(
-            "eventLocation"
-        );
+        document.getElementById("eventLocation");
+
 
     const locationText =
         resolveLocation(
@@ -510,19 +462,11 @@ function renderEvent(event){
     }
 
 
-    // ========================================================
-    // IMAGE
-    // ========================================================
-
     const photoBox =
-        document.getElementById(
-            "photoBox"
-        );
+        document.getElementById("photoBox");
 
     const campaignImage =
-        document.getElementById(
-            "campaignImage"
-        );
+        document.getElementById("campaignImage");
 
 
     if(campaign.image){
@@ -542,10 +486,6 @@ function renderEvent(event){
 
     }
 
-
-    // ========================================================
-    // LOGO
-    // ========================================================
 
     const campaignLogoBox =
         document.getElementById(
@@ -567,8 +507,8 @@ function renderEvent(event){
             "hidden"
         );
 
-        // Couleur de fond du logo :
-        // celle fournie, sinon transparent.
+        // Couleur de fond du logo : celle fournie,
+        // sinon transparent.
         campaignLogoBox.style.background =
             campaign.logo_fond ||
             "transparent";
@@ -582,24 +522,14 @@ function renderEvent(event){
     }
 
 
-    // ========================================================
-    // FOND
-    // ========================================================
-
+    // Photo de fond de l'écran : si fournie, on l'applique avec un voile
+    // sombre pour garder le texte lisible ; sinon on garde le fond uni.
     const screen =
-        document.getElementById(
-            "screen"
-        );
+        document.getElementById("screen");
 
     const bgOverlay =
-        document.getElementById(
-            "bgOverlay"
-        );
+        document.getElementById("bgOverlay");
 
-
-    // Photo de fond de l'écran : si fournie,
-    // on l'applique avec un voile sombre pour garder
-    // le texte lisible ; sinon on garde le fond uni.
 
     if(campaign.fond){
 
@@ -620,14 +550,8 @@ function renderEvent(event){
     }
 
 
-    // ========================================================
-    // TARIF
-    // ========================================================
-
     const tarifEl =
-        document.getElementById(
-            "eventTarif"
-        );
+        document.getElementById("eventTarif");
 
 
     if(campaign.tarif){
@@ -685,10 +609,6 @@ function renderEvent(event){
     );
 
 
-    // ========================================================
-    // STATUT
-    // ========================================================
-
     const statusRibbon =
         document.getElementById(
             "statusRibbon"
@@ -725,15 +645,12 @@ function renderEvent(event){
     }
 
 
-    // ========================================================
-    // AJUSTEMENT AUTOMATIQUE
-    // ========================================================
+    updateCountdown();
 
-    // Après avoir tout rempli (donc une fois la vraie hauteur
-    // du texte connue, y compris le bandeau de statut qui vient
-    // d'apparaître ou non), on vérifie que ça tient dans l'espace
-    // disponible.
 
+    // Après avoir tout rempli (donc une fois la vraie hauteur du texte
+    // connue, y compris le bandeau de statut qui vient d'apparaître ou
+    // non), on vérifie que ça tient dans l'espace disponible.
     requestAnimationFrame(
         fitContent
     );
@@ -741,16 +658,10 @@ function renderEvent(event){
 }
 
 
-// ============================================================
-// REDIMENSIONNEMENT DU CONTENU
-// ============================================================
-
-// Réduit #content dans son ensemble (titre, compte à rebours,
-// photo, infos...) si son contenu naturel dépasse l'espace
-// disponible au-dessus du bandeau de statut, pour qu'aucun
-// texte ne soit jamais coupé/masqué, quelle que soit la longueur
-// du titre ou des autres champs.
-
+// Réduit #content dans son ensemble (titre, compte à rebours, photo,
+// infos...) si son contenu naturel dépasse l'espace disponible au-dessus
+// du bandeau de statut, pour qu'aucun texte ne soit jamais coupé/masqué,
+// quelle que soit la longueur du titre ou des autres champs.
 function fitContent(){
 
     const content =
@@ -772,10 +683,8 @@ function fitContent(){
     if(!content || !screen) return;
 
 
-    // On repart d'une échelle neutre avant de mesurer,
-    // sinon une réduction précédente fausserait la mesure
-    // du contenu naturel.
-
+    // On repart d'une échelle neutre avant de mesurer, sinon une réduction
+    // précédente fausserait la mesure du contenu naturel.
     content.style.transform =
         "scale(1)";
 
@@ -815,10 +724,6 @@ function fitContent(){
 }
 
 
-// ============================================================
-// ÉCRAN VIDE
-// ============================================================
-
 function renderEmpty(){
 
     currentEvent = null;
@@ -829,10 +734,6 @@ function renderEmpty(){
 
 }
 
-
-// ============================================================
-// COMPTE À REBOURS
-// ============================================================
 
 function updateCountdown(){
 
@@ -852,8 +753,7 @@ function updateCountdown(){
     if(text === null){
 
         // L'événement affiché est maintenant terminé :
-        // on recharge les données pour passer au suivant.
-
+        // on recharge pour passer au suivant.
         loadEvents();
 
         return;
@@ -868,10 +768,6 @@ function updateCountdown(){
 
 }
 
-
-// ============================================================
-// CHARGEMENT DES ÉVÉNEMENTS
-// ============================================================
 
 async function loadEvents(){
 
@@ -962,16 +858,14 @@ async function loadEvents(){
 }
 
 
-// ============================================================
-// LANCEMENT
-// ============================================================
-
 loadEvents();
+
 
 setInterval(
     loadEvents,
     REFRESH_DATA_MS
 );
+
 
 setInterval(
     updateCountdown,
