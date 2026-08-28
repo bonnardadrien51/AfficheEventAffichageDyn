@@ -812,8 +812,30 @@ async function loadEvents(){
             json.events.length
         ){
 
-            const event =
-                json.events[0];
+            const requestedUid =
+                new URLSearchParams(
+                    window.location.search
+                ).get("event");
+
+            let event = null;
+
+            if(requestedUid){
+
+                event =
+                    json.events.find(
+                        e => e.uid === requestedUid
+                    );
+
+            }
+
+            // Pas de paramètre, ou uid introuvable
+            // (événement passé/supprimé entretemps) :
+            // on retombe sur le prochain événement.
+            if(!event){
+
+                event = json.events[0];
+
+            }
 
 
             const override =
